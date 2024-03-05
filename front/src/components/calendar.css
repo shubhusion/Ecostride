@@ -1,0 +1,41 @@
+/* calendar.css */
+.calendar-container {
+    width: 45%;
+  }
+  
+  .calendar-layout {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+  
+  .calendar-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  
+    &.has-content {
+      background-color: #a0d3e8;
+    }
+  
+    &.selected {
+      background-color: #68b684;
+      color: #fff;
+    }
+  }
+  
+  .selected-date-info {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+  }
+  

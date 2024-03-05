@@ -1,0 +1,13 @@
+.action-sections-container {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+  }
+  
+  .action-section {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  

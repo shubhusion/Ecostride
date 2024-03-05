@@ -1,0 +1,8 @@
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
