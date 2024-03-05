@@ -1,14 +1,41 @@
-.home-container {
+/* home.css */
+body {
+    margin: 0;
+  }
+  
+  .main-container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 3%; /* Adjust as needed */
+    background-color: black;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    transition: width 0.3s ease; /* Add smooth transition effect */
+    position: fixed;
+    height: 100%;
+    overflow-y: auto; /* Add scrollbar when needed */
+  }
+  
+  .sidebar:hover {
+    width: 7%; /* Adjust as needed */
+  }
+  
+  .content-container {
+    width: 92%; /* Adjust as needed */
+    padding: 20px;
+    margin-left: 8%; /* Adjust margin to accommodate the sidebar */
   }
   
   .sections-container {
+    width: 100%;
     display: flex;
-    width: 80%;
-    justify-content: space-between;
-    align-items: stretch;
-    margin: 0 10%;
+    flex-direction: row;
+    justify-content: space-around;
   }
   
