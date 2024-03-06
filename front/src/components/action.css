@@ -1,13 +1,31 @@
+/* action.css */
 .action-sections-container {
-    display: flex;
-    flex-direction: column;
-    width: 45%;
-  }
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  gap: 20px;
+}
+
+.action-section {
+  width: 80%;
   
-  .action-section {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-  }
-  
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
+  /* Center text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.action-section:hover {
+  background-color: #f0f0f0; /* Light background color on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Shadow effect */
+  transform: scale(1.1); /* Bigger on hover */
+}

@@ -20,7 +20,7 @@
   
   .sidebar-option span {
     opacity: 0; /* Initially hide the title */
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
   }
   
   .sidebar-option:hover span {

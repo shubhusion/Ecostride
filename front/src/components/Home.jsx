@@ -3,6 +3,7 @@ import React from 'react';
 import Calendar from './Calendar';
 import Sidebar from './Sidebar';
 import ActionSections from './Action';
+import Market from './market';
 
 import './home.css'; // Add this import for your main styling
 
@@ -20,6 +21,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Market />
     </>
   );
 };
