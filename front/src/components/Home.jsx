@@ -4,6 +4,7 @@ import Calendar from './Calendar';
 import Sidebar from './Sidebar';
 import ActionSections from './Action';
 import Market from './market';
+import Footer from './footer';
 
 import './home.css'; // Add this import for your main styling
 
@@ -22,6 +23,7 @@ const Home = () => {
         </div>
       </div>
       <Market />
+      <Footer />
     </>
   );
 };
