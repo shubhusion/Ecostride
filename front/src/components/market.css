@@ -3,11 +3,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 40px;
-    margin-top: 20px;
-    margin-left: 120px;
-    margin-right: 20px;
-    margin-bottom: 40px;
+    gap: 50px;
+    margin: 80px;
   }
   
   .market-card {

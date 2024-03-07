@@ -1,11 +1,11 @@
 /* Sidebar.css */
 .sidebar-options {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 80%;
-    margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+  margin-bottom: 40px;
   }
   
   .sidebar-option {

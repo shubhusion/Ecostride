@@ -1,9 +1,13 @@
 footer {
-    width: 100%;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000; 
+  margin-top: 80px;
   }
   
   .footer-container {
-    background: #000000;
+    background: rgb(24, 115, 24);
     color: #fff;
     padding: 20px;
   }

@@ -17,7 +17,7 @@ body {
     justify-content: space-between;
     padding: 20px;
     transition: width 0.3s ease; /* Add smooth transition effect */
-    position: fixed;
+    position:fixed;
     height: 100%;
     overflow-y: auto; /* Add scrollbar when needed */
   }
@@ -27,9 +27,9 @@ body {
   }
   
   .content-container {
-    width: 92%; /* Adjust as needed */
-    padding: 20px;
-    margin-left: 8%; /* Adjust margin to accommodate the sidebar */
+    width: 100%; /* Adjust as needed */
+    padding: 20px; /* Adjust margin to accommodate the sidebar */
+    margin: 20px;
   }
   
   .sections-container {
