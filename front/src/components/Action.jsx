@@ -23,6 +23,7 @@ function ActionSections() {
       </div>
       <div className="action-section">
         <h3>Water Conservation</h3>
+        <water />
         {/* Add content and styling for this section */}
       </div>
     </div>
