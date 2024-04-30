@@ -1,0 +1,74 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('./images/sustain.jpg') center/cover fixed no-repeat;
+  }
+  
+  .container {
+    max-width: 50%;
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #008080;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #f7fafa;
+  }
+  
+  input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #008080;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px; /* Adjust this width as needed */
+    box-sizing: border-box;
+  }
+  
+  input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+  }
+  
+  input[type="submit"] {
+    background-color: #008080;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #006666;
+  }
+  
+  .result {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .result p {
+    color: #008080;
+    font-weight: bold;
+  }
+  
+  div{
+    color: whitesmoke;
+    margin: 20px;
+    text-align: center;
+    font-size: large;
+  }
