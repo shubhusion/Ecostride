@@ -1,109 +1,108 @@
 import React, { useState } from 'react';
-import './Waste.css'; // Import CSS for styling
+import './Waste.css';
 
-const WasteReduction = () => {
-  // State variables to store form data
-  const [auditData, setAuditData] = useState({
-    wasteType: '',
-    quantity: 0,
-    date: ''
+const FoodWasteTracker = () => {
+  const [wasteData, setWasteData] = useState({
+    freshProduce: 0,
+    leftovers: 0,
+    expiredSpoiledFood: 0,
+    unusableParts: 0,
+    cookingWaste: 0,
+    packagedFood: 0,
+    unusedIngredients: 0,
+    beverages: 0,
+    expiredCondiments: 0,
+    plateWaste: 0,
   });
 
-  const [recyclingData, setRecyclingData] = useState({
-    materialType: '',
-    quantity: 0,
-    date: ''
+  const [wasteReductionData, setWasteReductionData] = useState({
+    freshProduce: 0,
+    leftovers: 0,
+    expiredSpoiledFood: 0,
+    unusableParts: 0,
+    cookingWaste: 0,
+    packagedFood: 0,
+    unusedIngredients: 0,
+    beverages: 0,
+    expiredCondiments: 0,
+    plateWaste: 0,
   });
 
-  const [compostingData, setCompostingData] = useState({
-    compostType: '',
-    quantity: 0,
-    date: ''
-  });
+  const [totalWaste, setTotalWaste] = useState(0);
+  const [totalWasteReduction, setTotalWasteReduction] = useState(0);
+  const [reductionPercentage, setReductionPercentage] = useState(0);
 
-  const [foodWasteData, setFoodWasteData] = useState({
-    foodType: '',
-    quantity: 0,
-    date: ''
-  });
-
-  // Function to handle submitting waste audit data
-  const submitAuditData = () => {
-    console.log('Waste audit data submitted:', auditData);
-    // Logic to submit audit data
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setWasteData({ ...wasteData, [name]: parseFloat(value) });
   };
 
-  // Function to handle submitting recycling data
-  const submitRecyclingData = () => {
-    console.log('Recycling data submitted:', recyclingData);
-    // Logic to submit recycling data
+  const handleReductionInputChange = (e) => {
+    const { name, value } = e.target;
+    setWasteReductionData({ ...wasteReductionData, [name]: parseFloat(value) });
   };
 
-  // Function to handle submitting composting data
-  const submitCompostingData = () => {
-    console.log('Composting data submitted:', compostingData);
-    // Logic to submit composting data
+  const calculateTotalWaste = () => {
+    const total = Object.values(wasteData).reduce((acc, curr) => acc + curr, 0);
+    setTotalWaste(total);
   };
 
-  // Function to handle submitting food waste reduction data
-  const submitFoodWasteData = () => {
-    console.log('Food waste reduction data submitted:', foodWasteData);
-    // Logic to submit food waste reduction data
+  const calculateTotalWasteReduction = () => {
+    const totalReduction = Object.values(wasteReductionData).reduce((acc, curr) => acc + curr, 0);
+    setTotalWasteReduction(totalReduction);
+  };
+
+  const calculateReductionPercentage = () => {
+    if (totalWaste !== 0) {
+      const percentage = (totalWasteReduction / totalWaste) * 100;
+      setReductionPercentage(percentage.toFixed(2));
+    } else {
+      setReductionPercentage(0);
+    }
   };
 
   return (
-    <div className="waste-reduction-container">
-      <h2>Waste Reduction</h2>
-      <div className="waste-section">
-        <h3>Waste Audit</h3>
-        <form onSubmit={(e) => { e.preventDefault(); submitAuditData(); }}>
-          <label>Waste Type:</label>
-          <input type="text" value={auditData.wasteType} onChange={(e) => setAuditData({ ...auditData, wasteType: e.target.value })} />
-          <label>Quantity:</label>
-          <input type="number" value={auditData.quantity} onChange={(e) => setAuditData({ ...auditData, quantity: parseInt(e.target.value) })} />
-          <label>Date:</label>
-          <input type="date" value={auditData.date} onChange={(e) => setAuditData({ ...auditData, date: e.target.value })} />
-          <button type="submit">Submit</button>
-        </form>
+    <div className="food-waste-tracker">
+      <h2>Food Waste Tracker</h2>
+      {/* Input fields for waste quantities */}
+      <div className="waste-categories">
+        {/* Input fields for waste quantities */}
+        {Object.keys(wasteData).map((category) => (
+          <div key={category} className="waste-category">
+            <label>{category}:</label>
+            <input type="number" name={category} value={wasteData[category]} onChange={handleInputChange} />
+          </div>
+        ))}
       </div>
-      <div className="waste-section">
-        <h3>Recycling Programs</h3>
-        <form onSubmit={(e) => { e.preventDefault(); submitRecyclingData(); }}>
-          <label>Material Type:</label>
-          <input type="text" value={recyclingData.materialType} onChange={(e) => setRecyclingData({ ...recyclingData, materialType: e.target.value })} />
-          <label>Quantity:</label>
-          <input type="number" value={recyclingData.quantity} onChange={(e) => setRecyclingData({ ...recyclingData, quantity: parseInt(e.target.value) })} />
-          <label>Date:</label>
-          <input type="date" value={recyclingData.date} onChange={(e) => setRecyclingData({ ...recyclingData, date: e.target.value })} />
-          <button type="submit">Submit</button>
-        </form>
+
+      {/* Input fields for waste reduction */}
+      <div className="waste-reduction-categories">
+        {Object.keys(wasteReductionData).map((category) => (
+          <div key={category} className="waste-reduction-category">
+            <label>Reduce {category}:</label>
+            <input type="number" name={category} value={wasteReductionData[category]} onChange={handleReductionInputChange} />
+          </div>
+        ))}
       </div>
-      <div className="waste-section">
-        <h3>Composting</h3>
-        <form onSubmit={(e) => { e.preventDefault(); submitCompostingData(); }}>
-          <label>Compost Type:</label>
-          <input type="text" value={compostingData.compostType} onChange={(e) => setCompostingData({ ...compostingData, compostType: e.target.value })} />
-          <label>Quantity:</label>
-          <input type="number" value={compostingData.quantity} onChange={(e) => setCompostingData({ ...compostingData, quantity: parseInt(e.target.value) })} />
-          <label>Date:</label>
-          <input type="date" value={compostingData.date} onChange={(e) => setCompostingData({ ...compostingData, date: e.target.value })} />
-          <button type="submit">Submit</button>
-        </form>
+
+      <div className="action-buttons">
+        <button onClick={calculateTotalWaste}>Calculate Total Waste</button>
+        <button onClick={calculateTotalWasteReduction}>Calculate Total Waste Reduction</button>
+        <button onClick={calculateReductionPercentage}>Calculate Reduction Percentage</button>
       </div>
-      <div className="waste-section">
-        <h3>Food Waste Reduction</h3>
-        <form onSubmit={(e) => { e.preventDefault(); submitFoodWasteData(); }}>
-          <label>Food Type:</label>
-          <input type="text" value={foodWasteData.foodType} onChange={(e) => setFoodWasteData({ ...foodWasteData, foodType: e.target.value })} />
-          <label>Quantity:</label>
-          <input type="number" value={foodWasteData.quantity} onChange={(e) => setFoodWasteData({ ...foodWasteData, quantity: parseInt(e.target.value) })} />
-          <label>Date:</label>
-          <input type="date" value={foodWasteData.date} onChange={(e) => setFoodWasteData({ ...foodWasteData, date: e.target.value })} />
-          <button type="submit">Submit</button>
-        </form>
+
+      {/* Display total waste, total waste reduction, and reduction percentage */}
+      <div className="total-waste">
+        <p>Total Waste: {totalWaste}</p>
+      </div>
+      <div className="total-waste-reduction">
+        <p>Total Waste Reduction: {totalWasteReduction}</p>
+      </div>
+      <div className="reduction-percentage">
+        <p>Reduction Percentage: {reductionPercentage}%</p>
       </div>
     </div>
   );
 };
 
-export default WasteReduction;
+export default FoodWasteTracker;
