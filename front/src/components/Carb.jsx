@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './carbon.css'
+// import './carbon.css'
 
 function Carb() {
   const [formData, setFormData] = useState({});
