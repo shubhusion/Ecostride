@@ -8,7 +8,7 @@
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=white)](https://firebase.google.com/)
 
 <div align="center">
-  <img src="https://i.imgur.com/4ZdnQFK.png" alt="EcoStride Logo" width="200">
+  <img src="https://github.com/shubhusion/EcoStride-Sustainability-Living-Tracker/blob/main/front/public/images/EcoStride_logo.png" alt="EcoStride Logo" width="200">
 </div>
 
 EcoStride is a revolutionary platform that seamlessly blends cutting-edge technology with real-life eco-consciousness. It empowers users to monitor their energy consumption, carbon footprint, water conservation, waste reduction, and engage in sustainable shopping across diverse categories like Clothing, Food, Travel, and more.
