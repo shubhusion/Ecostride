@@ -6,24 +6,25 @@ import Home from './components/Home';
 import Calendar from './components/Calendar';
 import Water from './components/water';
 import Waste from './components/Waste';
-import Carb from './components/Carb'
-
+import Carb from './components/Carb';
+import SignIn from './components/signin'; // assuming your component name is SignIn
 
 function App() {
   return (
     <Router>
-    <Routes>
+      <Routes>
         <Route path="/" element={<Home />} exact render={() => (
-            <div className="app-container">
-              <Home />
-            </div>
-          )} />
+          <div className="app-container">
+            <Home />
+          </div>
+        )} />
         <Route path="/carbon-footprint" element={<Carb />} />
         {/* <Route path="/energy-saved" component={EnergySaved} /> */}
         <Route path="/waste-reduction-progress" element={<Waste />} />
         {/* <Route path="/sustainable-shopping" component={SustainableShopping} /> */}
         <Route path="/water-conservation" element={<Water />} />
-    </Routes>
+        <Route path="/signin" element={<SignIn />} /> {/* Route for SignIn */}
+      </Routes>
     </Router>
   );
 }

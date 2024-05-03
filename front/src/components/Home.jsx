@@ -5,7 +5,6 @@ import ActionSections from './Action';
 import Market from './market';
 import Footer from './footer';
 import Header from './header';
-
 import './home.css'; // Add this import for your main styling
 
 const Home = () => {
@@ -21,6 +20,7 @@ const Home = () => {
         </div>
       </div>
       <Market />
+      
       <Footer />
     </>
   );
