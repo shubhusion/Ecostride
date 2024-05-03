@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="https://github.com/shubhusion/EcoStride-Sustainability-Living-Tracker/blob/main/front/public/images/EcoStride_logo.png" alt="EcoStride Logo" width="200">
+</div>
+
 # EcoStride: Sustainability Living Tracker 🌳🌍💚
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -7,9 +11,7 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=white)](https://firebase.google.com/)
 
-<div align="center">
-  <img src="https://github.com/shubhusion/EcoStride-Sustainability-Living-Tracker/blob/main/front/public/images/EcoStride_logo.png" alt="EcoStride Logo" width="200">
-</div>
+
 
 EcoStride is a revolutionary platform that seamlessly blends cutting-edge technology with real-life eco-consciousness. It empowers users to monitor their energy consumption, carbon footprint, water conservation, waste reduction, and engage in sustainable shopping across diverse categories like Clothing, Food, Travel, and more.
 
