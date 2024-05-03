@@ -1,14 +1,19 @@
+// userRoute.js
 const express = require('express');
 const router = express.Router();
-const { registerUser, getUserProfile, updateUserProfile } = require('../controllers/userController');
+const authenticateJWT = require('../middlewares/authMiddleware'); // Import the middleware
+const { registerUser, loginUser, getUserProfile, updateUserProfile } = require('../controllers/userController');
 
 // Register a new user
 router.post('/register', registerUser);
 
+// Login user
+router.post('/login', loginUser);
+
 // Get user profile
-router.get('/profile', getUserProfile);
+router.get('/profile', authenticateJWT, getUserProfile); // Apply the middleware
 
 // Update user profile
-router.put('/profile', updateUserProfile);
+router.put('/profile', authenticateJWT, updateUserProfile); // Apply the middleware
 
 module.exports = router;
