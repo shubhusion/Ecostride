@@ -1,6 +1,7 @@
 /* home.css */
 body {
     margin: 0;
+    background-image: linear-gradient(135deg, rgb(133, 207, 214), rgb(162, 213, 120));
   }
   
   .main-container {

@@ -1,9 +1,21 @@
 /* calendar.css */
 
 /* Common styles for all screen sizes */
+.action-title{
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(70, 8, 33);
+  padding: 5px;
+  text-align: justify;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0.5, 0.8);
+  margin-bottom: 10px;
+}
+
 .calendar-container {
   width: 45%;
 }
+
+
 
 .calendar-layout {
   display: grid;

@@ -1,0 +1,14 @@
+/* company.css */
+.company {
+    font-size: 3rem; 
+    font-weight: bold;
+    color: rgb(33, 148, 91);
+    padding: 10px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0.5, 0.8); 
+  }
+  
+  .stride {
+    color: rgb(218, 212, 18); /* Color for the 'Stride' part */
+  }
+  

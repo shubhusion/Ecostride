@@ -1,68 +1,85 @@
 /* header.css */
 
 .header {
-    background: rgb(24, 115, 24);
-    color: #fff;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgb(1, 16, 1);
-  }
-  
-  .header-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    max-width: 100%;
-    margin: 10px;
-  }
-  
-  .header-logo {
-    font-size: 2rem;
-  }
-  
-  .header-logo img {
-    max-height: 64px;
-    border-radius: 50%;
-    border: 1px solid rgb(7, 39, 7);
-  }
-  
-  .header-search {
-    display: flex;
-    align-items: center;
-    flex-grow: 0.4;
-  }
+  background: rgb(24, 115, 24);
+  color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgb(1, 16, 1);
+}
 
-  .header-logo {
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  margin: 10px;
+}
 
+.header-logo {
+  font-size: 2rem;
+}
+
+.header-logo img {
+  max-height: 64px;
+  border-radius: 50%;
+  border: 1px solid rgb(7, 39, 7);
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  flex-grow: 0.4;
+}
+
+.header-search input {
+  padding: 15px;
+  margin-right: 0px;
+  border: none;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.header-options {
+  display: flex;
+  flex-grow: 0.2;
+  justify-content: space-around;
+}
+
+.header-option {
+  margin: 0 10px;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-icon {
+  position: absolute;
+  top: 6.2%;
+  right: 41.5%;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .header-icon {
+    position: absolute;
+    top: 6.2%; 
+    right: 48%; 
   }
-  
-  .header-search input {
-    padding: 8px;
-    margin-right: 5px;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-  }
-  
-  .header-options {
-    display: flex;
-  }
-  
-  .header-option {
-    margin: 0 10px;
-    cursor: pointer;
-    color: white;
-    transition: color 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .header-option span {
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  
-  .header-option:hover span {
-    opacity: 1;
-  }
-  
+}
+
+.header-option span {
+  opacity: 0.8;
+  transition: opacity 0.4s ease;
+}
+
+.header-option:hover span {
+  opacity: 1;
+}
+
+.header-icon {
+  cursor: pointer;
+}
+

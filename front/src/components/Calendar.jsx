@@ -19,7 +19,9 @@ function Calendar() {
 
   return (
     <div className="calendar-container">
-    <h2>Your Sustainable Progress</h2>
+    <div className='action-title'>
+       Your Sustainable Progress
+    </div>
       <div className="calendar-layout">
         {[...Array(31)].map((_, index) => {
           const date = index + 1;

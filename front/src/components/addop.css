@@ -1,0 +1,21 @@
+.additional-options {
+    display: flex;
+    justify-content: space-around;
+    color: #290909;
+    padding-top: 10px;
+  
+  }
+  
+  .additional-option {
+    display: inline-block;
+    margin: 0 0;
+    cursor: pointer;
+    padding: 5px 5px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .additional-option:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  

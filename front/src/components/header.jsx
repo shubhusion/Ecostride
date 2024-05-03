@@ -6,36 +6,37 @@ import './header.css';
 
 const Header = () => {
   const headerOptions = [
-    { icon: faUser, title: 'Profile' },
     { icon: faUsers, title: 'Community' },
     { icon: faBullseye, title: 'Goals' },
     { icon: faLightbulb, title: 'Feedback' },
     { icon: faShoppingCart, title: 'Cart' },
+    { icon: faUser, title: 'Profile' }
   ];
 
   return (
-    <header className="header">
-      <div className="header-container">
-        <div className="header-logo">
-          <img src="./images/logo.png">
-          </img>
-        </div>
-        <div className="header-search">
-          <input type="text" placeholder="Search..." />
-        </div>
-        <div classname="header-icon">
-           <FontAwesomeIcon icon={faSearch} />
-        </div>
-        <div className="header-options">
-          {headerOptions.map((option, index) => (
-            <div key={index} className="header-option">
-              <FontAwesomeIcon icon={option.icon} />
-              <span>{option.title}</span>
+    <div>
+      <header className="header">
+        <div className="header-container">
+          <div className="header-logo">
+            <img src="./images/logo.png" alt="Logo" />
+          </div>
+          <div className="header-search">
+            <input type="text" placeholder="Search here..." />
+            <div className="header-icon">
+              <FontAwesomeIcon icon={faSearch} size="lg" />
             </div>
-          ))}
+          </div>
+          <div className="header-options">
+            {headerOptions.map((option, index) => (
+              <div key={index} className="header-option">
+                <FontAwesomeIcon icon={option.icon} size="lg" />
+                <span>{option.title}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 };
 
