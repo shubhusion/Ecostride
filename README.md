@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/shubhusion/EcoStride-Sustainability-Living-Tracker/blob/main/front/public/images/EcoStride_logo-removebg-preview.png" alt="EcoStride Logo" width="200">
+  <img src="https://github.com/shubhusion/EcoStride-Sustainability-Living-Tracker/blob/main/front/public/images/EcoStride_logo(1).png" alt="EcoStride Logo" width="200">
 </div>
 
 # EcoStride: Sustainability Living Tracker 🌳🌍💚
@@ -82,5 +82,5 @@ EcoStride is an educational project developed by Aditya Kumar, Shubham Sharma, a
 
 <div align="center">
   <h3>Join the Sustainable Revolution with EcoStride! 🌿</h3>
-  <img src="https://github.com/shubhusion/EcoStride-Sustainability-Living-Tracker/blob/main/front/public/images/EcoStride_logo-removebg-preview.png" alt="EcoStride Banner" width="600">
+  <img src="https://github.com/shubhusion/EcoStride-Sustainability-Living-Tracker/blob/main/front/public/images/EcoStride_logo(1).png" alt="EcoStride Banner" width="600">
 </div>
