@@ -43,43 +43,44 @@ exports.addToCart = async (req, res) => {
   }
 };
 
-// Remove an item from the cart
 exports.removeFromCart = async (req, res) => {
-  try {
-    const { productId } = req.params;
-    const cart = await Cart.findOne({ userId: req.user._id });
-
-    if (!cart) {
-      return res.status(404).json({ message: 'Cart not found' });
+    try {
+      const { productId } = req.params;
+      const cart = await Cart.findOne({ userId: req.user._id });
+      console.log("Cart:", cart); // Log the cart to see if it's found
+      if (!cart) {
+        return res.status(404).json({ message: 'Cart not found' });
+      }
+  
+      const itemIndex = cart.items.findIndex(
+        (item) => item.productId.toString() === productId
+      );
+      console.log("Item Index:", itemIndex); // Log the itemIndex to see if the item is found
+  
+      if (itemIndex === -1) {
+        return res.status(404).json({ message: 'Item not found in cart' });
+      }
+  
+      // Find the product by productId to get the price
+      const product = await Product.findOne({ productId });
+      console.log("Product:", product); // Log the product to see if it's found
+      if (!product) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+  
+      const itemPrice = product.price;
+      const itemQuantity = cart.items[itemIndex].quantity;
+      cart.totalAmount -= itemPrice * itemQuantity;
+      cart.items.splice(itemIndex, 1);
+  
+      await cart.save();
+  
+      res.json(cart);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
     }
-
-    const itemIndex = cart.items.findIndex(
-      (item) => item.productId.toString() === productId
-    );
-
-    if (itemIndex === -1) {
-      return res.status(404).json({ message: 'Item not found in cart' });
-    }
-
-    // Find the product by productId to get the price
-    const product = await Product.findById(productId);
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-
-    const itemPrice = product.price;
-    const itemQuantity = cart.items[itemIndex].quantity;
-    cart.totalAmount -= itemPrice * itemQuantity;
-    cart.items.splice(itemIndex, 1);
-
-    await cart.save();
-
-    res.json(cart);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
+  };
+  
 
 // Get the user's cart
 exports.getUserCart = async (req, res) => {
