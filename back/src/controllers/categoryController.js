@@ -21,10 +21,11 @@ exports.getAllCategories = async (req, res) => {
   }
 };
 
-// Get a single category
+// Get a single category by categoryId
 exports.getCategoryById = async (req, res) => {
   try {
-    const category = await Category.findById(req.params.id).populate('products');
+    const { categoryId } = req.params;
+    const category = await Category.findOne({ categoryId });
     if (!category) {
       return res.status(404).json({ message: 'Category not found' });
     }
@@ -37,10 +38,9 @@ exports.getCategoryById = async (req, res) => {
 // Update a category
 exports.updateCategory = async (req, res) => {
   try {
-    const category = await Category.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const { categoryId } = req.params;
+    const { name, description } = req.body;
+    const category = await Category.findOneAndUpdate({ categoryId }, { name, description }, { new: true });
     if (!category) {
       return res.status(404).json({ message: 'Category not found' });
     }
@@ -53,7 +53,8 @@ exports.updateCategory = async (req, res) => {
 // Delete a category
 exports.deleteCategory = async (req, res) => {
   try {
-    const category = await Category.findByIdAndDelete(req.params.id);
+    const { categoryId } = req.params;
+    const category = await Category.findOneAndDelete({ categoryId });
     if (!category) {
       return res.status(404).json({ message: 'Category not found' });
     }
