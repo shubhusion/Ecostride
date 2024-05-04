@@ -15,12 +15,12 @@ router.post('/', createCategory);
 router.get('/', getAllCategories);
 
 // Get a single category
-router.get('/:id', getCategoryById);
+router.get('/:categoryId', getCategoryById);
 
 // Update a category
-router.put('/:id', updateCategory);
+router.put('/:categoryId', updateCategory);
 
 // Delete a category
-router.delete('/:id', deleteCategory);
+router.delete('/:categoryId', deleteCategory);
 
 module.exports = router;

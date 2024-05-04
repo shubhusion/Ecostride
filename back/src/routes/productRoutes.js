@@ -15,12 +15,12 @@ router.post('/', createProduct);
 router.get('/', getAllProducts);
 
 // Get a single product
-router.get('/:id', getProductById);
+router.get('/:productId', getProductById);
 
 // Update a product
-router.put('/:id', updateProduct);
+router.put('/:productId', updateProduct);
 
 // Delete a product
-router.delete('/:id', deleteProduct);
+router.delete('/:productId', deleteProduct);
 
 module.exports = router;

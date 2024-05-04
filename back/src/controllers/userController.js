@@ -18,7 +18,6 @@ exports.registerUser = async (req, res) => {
 exports.getUserProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
-        console.log("User", user)
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
