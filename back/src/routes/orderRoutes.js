@@ -6,17 +6,17 @@ const {
   getOrderById,
   updateOrder,
 } = require('../controllers/orderController');
-
+const authenticateJWT = require('../middlewares/authMiddleware'); // Import the middleware
 // Create a new order
-router.post('/', createOrder);
+router.post('/', authenticateJWT ,createOrder);
 
 // Get user's orders
-router.get('/', getUserOrders);
+router.get('/', authenticateJWT , getUserOrders);
 
 // Get a single order
-router.get('/:id', getOrderById);
+router.get('/:orderId', authenticateJWT , getOrderById);
 
 // Update an order
-router.put('/:id', updateOrder);
+router.put('/:orderId', authenticateJWT , updateOrder);
 
 module.exports = router;
