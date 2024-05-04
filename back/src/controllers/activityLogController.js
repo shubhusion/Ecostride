@@ -1,14 +1,13 @@
 const ActivityLog = require('../models/activityLog');
-
+const User = require('../models/user'); // Import the User model
 // Create a new activity log
 exports.createActivityLog = async (req, res) => {
   try {
-    const { activityType, activityDate, rewardPoints, description } = req.body;
+    const { activityType, activityDate, description } = req.body;
     const activityLog = await ActivityLog.create({
       userId: req.user._id,
       activityType,
       activityDate,
-      rewardPoints,
       description,
     });
     res.status(201).json(activityLog);
