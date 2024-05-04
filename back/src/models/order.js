@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema(
   {
+    orderId: { type: Number, required: true, unique: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     products: [
       {
@@ -19,6 +20,20 @@ const orderSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+orderSchema.pre('save', async function (next) {
+  const order = this;
+  if (!order.isNew) {
+    return next();
+  }
+  try {
+    const maxOrderId = await Order.findOne().sort('-orderId').select('orderId').lean();
+    order.orderId = (maxOrderId && maxOrderId.orderId || 0) + 1;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 const Order = mongoose.model('Order', orderSchema);
 
