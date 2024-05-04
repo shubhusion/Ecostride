@@ -3,10 +3,18 @@ const mongoose = require('mongoose');
 const activityLogSchema = new mongoose.Schema(
   {
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    activityType: { type: String, required: true },
+    electricityBill: Number,
+    gasBill: Number,
+    oilBill: Number,
+    carMileage: Number,
+    shortFlights: Number,
+    longFlights: Number,
+    recycleNewspaper: Boolean,
+    recycleAluminum: Boolean,
+    totalFootprint: { type: Number, required: true },
+    category: String,
     activityDate: { type: Date, required: true },
-    rewardPoints: { type: Number, required: true },
-    description: { type: String },
+    description: String
   },
   {
     timestamps: true,
