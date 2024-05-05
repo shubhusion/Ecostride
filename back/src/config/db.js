@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Connection URL with database name
-const connectionString = 'mongodb://127.0.0.1:27017/sustainable-tracker';
+const connectionString = 'mongodb+srv://shubham2703:shubham27@cluster0.go8ehvm.mongodb.net/';
 
 const connectDB = async () => {
   try {
