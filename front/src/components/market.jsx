@@ -1,22 +1,24 @@
 // Market.jsx
 import React from 'react';
 import './market.css'; // Add this import for market styling
+import Marketplace from './marketplace';
 
 const categories = [
+  'Sustainable Products',
+  'Left Clothes',
+  'Remaining Food Stock',
   'E-Waste',
   'Plastic',
   'Lead and Glass',
   'Aluminium and Tin',
   'Iron',
   'Biodegradable Waste',
-  'Remaining Food Stock',
-  'Left Clothes',
-  'Sustainable Products',
-  // Add more categories as needed
 ];
 
 const Market = () => {
   return (
+    <>
+    <Marketplace />
     <div className="market-container">
       {categories.map((category, index) => (
         <div key={index} className="market-card">
@@ -25,6 +27,7 @@ const Market = () => {
         </div>
       ))}
     </div>
+    </>
   );
 };
 

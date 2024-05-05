@@ -18,6 +18,7 @@
 }
 
 .action-section {
+  color: rgb(73, 54, 38);
   width: 80%;
   flex: 1;
   padding: 10px;
@@ -35,12 +36,9 @@
 
 }
 
-.action-section a {
-  text-decoration: none !important; 
-}
 
 .action-section:hover {
-  background-color: #f0f0f0; /* Light background color on hover */
+  background-color: #67cbab; /* Light background color on hover */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Shadow effect */
   transform: scale(1.1); /* Bigger on hover */
 }

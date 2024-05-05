@@ -1,27 +1,65 @@
-/* market.css */
 .market-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 50px;
-    margin: 80px;
-  }
-  
-  .market-card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 150px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .market-card:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 50px;
+  margin-bottom: 80px;
+  margin-top: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.market-card {
+  color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.market-card:hover{
+  transform: scale(1.1);
+}
+
+.market-card:nth-child(1) {
+  background-image: url('./images/sustainable.jpg'); /* Replace 'image1.jpg' with the URL of your first image */
+}
+
+.market-card:nth-child(2) {
+  background-image: url('./images/cloth.jpg'); /* Replace 'image2.jpg' with the URL of your second image */
+}
+
+.market-card:nth-child(3) {
+  background-image: url('./images/food.jpg'); /* Replace 'image1.jpg' with the URL of your first image */
+}
+
+.market-card:nth-child(4) {
+  background-image: url('./images/ewaste.jpg'); /* Replace 'image1.jpg' with the URL of your first image */
+}
+
+.market-card:nth-child(5) {
+  background-image: url('./images/plastic.jpg'); /* Replace 'image1.jpg' with the URL of your first image */
+}
+
+.market-card:nth-child(6) {
+  background-image: url('./images/glass.jpg'); /* Replace 'image1.jpg' with the URL of your first image */
+}
+
+.market-card:nth-child(7) {
+  background-image: url('./images/tin.jpg'); /* Replace 'image1.jpg' with the URL of your first image */
+}
+
+.market-card:nth-child(8) {
+  background-image: url('./images/iron.jpg'); /* Replace 'image1.jpg' with the URL of your first image */
+}
+
+.market-card:nth-child(9) {
+  background-image: url('./images/bio.jpg'); /* Replace 'image1.jpg' with the URL of your first image */
+}

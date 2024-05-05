@@ -39,14 +39,11 @@
 }
 
 .calendar-date:hover {
-  background-color: #e0e0e0;
+  background-color: #67cbab;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   transform: scale(1.3);
 }
 
-.has-content {
-  background-color: #a0d3e8;
-}
 
 .selected {
   background-color: #68b684;
@@ -56,8 +53,9 @@
 .selected-date-info {
   margin-top: 20px;
   padding: 10px;
-  background-color: #f0f0f0;
+  background-color: #68b684;
   border: 1px solid #ddd;
+  border-radius: 20px;
 }
 
 /* Responsive adjustments */

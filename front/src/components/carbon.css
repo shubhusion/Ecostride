@@ -1,74 +1,93 @@
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: url('./images/sustain.jpg') center/cover fixed no-repeat;
+/* carb.css */
+
+.carb-title{
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(70, 8, 33);
+  padding: 10px;
+  text-align: justify;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0.5, 0.8);
+  margin: 10px;
+}
+
+
+.carb-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.carb-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  background-image: linear-gradient(45deg, rgb(179, 224, 171), rgb(62, 131, 93));
+}
+
+.carb-form label {
+  font-weight: bold;
+}
+
+.carb-form input[type="number"],
+.carb-form input[type="checkbox"] {
+  width: 90%;
+  padding: 10px;
+  margin: 5px 0 15px;
+  border-radius: 12px;
+  border: 1px solid #cfe89e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
+  transition: box-shadow 0.3s ease; /* Add transition */
+}
+
+.carb-form input[type="number"]:hover,
+.carb-form input[type="checkbox"]:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
+.carb-form input[type="submit"] {
+  width: 30%; /* Adjust width */
+  padding: 15px; /* Increase padding */
+  margin: 20px auto; /* Center the button */
+  border: none;
+  border-radius: 20px;
+  background-color: #6c380d;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  color: #fcf9f9ce;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.carb-form input[type="submit"]:hover {
+  background-color: #814319; /* Change background color on hover */
+  transform: scale(1.1);
+}
+
+.carb-output {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.carb-output p {
+  margin-bottom: 20px;
+  font-size: 24px; 
+  font-weight: bold;
+  color: #4f4f4f; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
+  animation: fadeIn 0.5s ease; 
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .container {
-    max-width: 50%;
-    margin: 50px auto;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  to {
+    opacity: 1;
   }
-  
-  h1 {
-    text-align: center;
-    color: #008080;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #f7fafa;
-  }
-  
-  input {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #008080;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 300px; /* Adjust this width as needed */
-    box-sizing: border-box;
-  }
-  
-  input[type="checkbox"] {
-    width: auto;
-    margin-right: 5px;
-  }
-  
-  input[type="submit"] {
-    background-color: #008080;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #006666;
-  }
-  
-  .result {
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  .result p {
-    color: #008080;
-    font-weight: bold;
-  }
-  
-  div{
-    color: whitesmoke;
-    margin: 20px;
-    text-align: center;
-    font-size: large;
-  }
+}

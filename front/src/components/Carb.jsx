@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-// import './carbon.css'
+import './carbon.css';
+import Header from './header'
+import Company from './company'
+import Addop from './addop'
+import Footer from './footer';
 
 function Carb() {
   const [formData, setFormData] = useState({});
   const [result, setResult] = useState(null);
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
@@ -27,7 +32,6 @@ function Carb() {
       }
 
       const resultData = await response.json();
-      console.log(resultData);
       setResult(resultData);
     } catch (error) {
       console.error('Error:', error);
@@ -35,9 +39,15 @@ function Carb() {
   };
 
   return (
-    <div>
-      <h1>Carbon Footprint Calculator</h1>
-      <form onSubmit={handleSubmit}>
+    <>
+    <Header />
+    <Addop />
+    <Company />
+    <div className="carb-container">
+    <div className='carb-title'>
+    Carbon Footprint Calculator
+    </div>
+      <form className="carb-form" onSubmit={handleSubmit}>
         <label htmlFor="electricBill">Monthly Electric Bill (kWh): </label>
         <input type="number" id="electricBill" name="electricBill" onChange={handleInputChange} required /><br />
 
@@ -77,12 +87,14 @@ function Carb() {
         <input type="submit" value="Calculate" />
       </form>
       {result && (
-        <div>
+        <div className="carb-output">
           <p>Your Total Carbon Footprint: {result.totalFootprint.toFixed(2)} pounds per year</p>
           <p>Category: {result.category}</p>
         </div>
       )}
     </div>
+    <Footer />
+    </>
   );
 }
 
