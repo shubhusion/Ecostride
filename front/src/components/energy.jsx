@@ -1,22 +1,46 @@
 import React, { useState } from 'react';
 
 const Energy = () => {
-  const [refrigeratorHours, setRefrigeratorHours] = useState('');
-  const [televisionHours, setTelevisionHours] = useState('');
-  const [microwaveUsage, setMicrowaveUsage] = useState('');
-  const [airConditionerHours, setAirConditionerHours] = useState('');
-  const [washingMachineUsage, setWashingMachineUsage] = useState('');
-  const [electricHeaterHours, setElectricHeaterHours] = useState('');
-  const [vehicleDistance, setVehicleDistance] = useState('');
-  const [dishwasherUsage, setDishwasherUsage] = useState('');
-  const [computerHours, setComputerHours] = useState('');
-  const [electricStoveUsage, setElectricStoveUsage] = useState('');
-  const [sharedVehicleUsage, setSharedVehicleUsage] = useState(''); // New state for shared vehicle usage
+  const [energyUsage, setEnergyUsage] = useState({
+    refrigerator: { usage: '', savedEnergy: '' },
+    television: { usage: '', savedEnergy: '' },
+    microwave: { usage: '', savedEnergy: '' },
+    airConditioner: { usage: '', savedEnergy: '' },
+    washingMachine: { usage: '', savedEnergy: '' },
+    electricHeater: { usage: '', savedEnergy: '' },
+    vehicleDistance: { usage: '', savedEnergy: '' },
+    dishwasher: { usage: '', savedEnergy: '' },
+    computer: { usage: '', savedEnergy: '' },
+    electricStove: { usage: '', savedEnergy: '' },
+    sharedVehicleUsage: { usage: '', savedEnergy: '' }, // New state for shared vehicle usage
+  });
+
+  const [showOutput, setShowOutput] = useState(false);
   const [totalEnergyConsumption, setTotalEnergyConsumption] = useState(0);
   const [consumptionRange, setConsumptionRange] = useState('');
   const [consumptionChange, setConsumptionChange] = useState(0);
 
-  const handleSubmit = (e) => {
+  const handleEnergyUsageChange = (option, value) => {
+    setEnergyUsage((prevState) => ({
+      ...prevState,
+      [option]: {
+        ...prevState[option],
+        usage: value,
+      },
+    }));
+  };
+
+  const handleSavedEnergyChange = (option, value) => {
+    setEnergyUsage((prevState) => ({
+      ...prevState,
+      [option]: {
+        ...prevState[option],
+        savedEnergy: value,
+      },
+    }));
+  };
+
+  const handleCalculate = (e) => {
     e.preventDefault();
     const averageWatts = {
       refrigerator: 200, // Assuming 200W average refrigerator
@@ -30,27 +54,41 @@ const Energy = () => {
       electricStove: 1500, // Assuming 1500W average electric stove
     };
 
-    const totalRefrigeratorEnergy = refrigeratorHours * averageWatts.refrigerator;
-    const totalTelevisionEnergy = televisionHours * averageWatts.television;
-    const totalMicrowaveEnergy = microwaveUsage * averageWatts.microwave;
-    const totalAirConditionerEnergy = airConditionerHours * averageWatts.airConditioner;
-    const totalWashingMachineEnergy = washingMachineUsage * averageWatts.washingMachine;
-    const totalElectricHeaterEnergy = electricHeaterHours * averageWatts.electricHeater;
-    const totalDishwasherEnergy = dishwasherUsage * averageWatts.dishwasher;
-    const totalComputerEnergy = computerHours * averageWatts.computer;
-    const totalElectricStoveEnergy = electricStoveUsage * averageWatts.electricStove;
-    const totalSharedVehicleEnergy = vehicleDistance * 0.2; // Assuming 0.2 kWh per km for shared vehicle
+    let totalUsage = 0;
+    let totalSavedEnergy = 0;
 
-    const totalEnergy = totalRefrigeratorEnergy + totalTelevisionEnergy + totalMicrowaveEnergy
-                      + totalAirConditionerEnergy + totalWashingMachineEnergy + totalElectricHeaterEnergy
-                      + totalDishwasherEnergy + totalComputerEnergy + totalElectricStoveEnergy
-                      + totalSharedVehicleEnergy;
+    for (const option in energyUsage) {
+      const usage = parseFloat(energyUsage[option].usage) || 0;
+      const savedEnergy = parseFloat(energyUsage[option].savedEnergy) || 0;
 
-    setTotalEnergyConsumption(totalEnergy);
+      switch (option) {
+        case 'refrigerator':
+        case 'television':
+        case 'microwave':
+        case 'airConditioner':
+        case 'washingMachine':
+        case 'electricHeater':
+        case 'dishwasher':
+        case 'computer':
+        case 'electricStove':
+          totalUsage += usage * averageWatts[option];
+          totalSavedEnergy += savedEnergy * averageWatts[option];
+          break;
+        case 'vehicleDistance':
+        case 'sharedVehicleUsage':
+          totalUsage += usage * 0.2; // Assuming 0.2 kWh per km for vehicle
+          totalSavedEnergy += savedEnergy * 0.2;
+          break;
+        default:
+          break;
+      }
+    }
+
+    setTotalEnergyConsumption(totalUsage);
 
     // Calculate consumption change
     const averageConsumption = Object.values(averageWatts).reduce((acc, val) => acc + val, 0);
-    const percentageChange = ((totalEnergy - averageConsumption) / averageConsumption) * 100;
+    const percentageChange = ((totalUsage - averageConsumption) / averageConsumption) * 100;
     setConsumptionChange(percentageChange);
 
     // Determine consumption range
@@ -61,66 +99,293 @@ const Energy = () => {
     } else {
       setConsumptionRange('Average');
     }
+
+    setShowOutput(true);
   };
+
+  const suggestEnergySavingTips = () => {
+    const suggestions = [];
+
+    if (parseFloat(energyUsage.refrigerator.usage) > 8) {
+      suggestions.push('Consider replacing your refrigerator with a more energy-efficient model.');
+    }
+
+    if (parseFloat(energyUsage.television.usage) > 4) {
+      suggestions.push('Turn off your television when not in use to save energy.');
+    }
+
+    if (parseFloat(energyUsage.airConditioner.usage) > 6) {
+      suggestions.push('Use air conditioning wisely and set the temperature higher to save energy.');
+    }
+
+    if (parseFloat(energyUsage.vehicleDistance.usage) > 50) {
+      suggestions.push('Consider using public transportation or carpooling to reduce vehicle energy consumption.');
+    }
+
+    // Add more suggestions based on different criteria
+
+    return suggestions;
+  };
+
+  const suggestions = showOutput ? suggestEnergySavingTips() : [];
 
   return (
     <div>
       <h2>Energy Consumption Calculator</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleCalculate}>
+        {/* Refrigerator */}
         <div>
-          <label>Refrigerator Hours per Day:</label>
-          <input type="number" value={refrigeratorHours} onChange={(e) => setRefrigeratorHours(e.target.value)} />
+          <h3>Refrigerator</h3>
+          <label>
+            Hours per Day:
+            <input
+              type="number"
+              value={energyUsage.refrigerator.usage}
+              onChange={(e) => handleEnergyUsageChange('refrigerator', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.refrigerator.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('refrigerator', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Television */}
         <div>
-          <label>Television Hours per Day:</label>
-          <input type="number" value={televisionHours} onChange={(e) => setTelevisionHours(e.target.value)} />
+          <h3>Television</h3>
+          <label>
+            Hours per Day:
+            <input
+              type="number"
+              value={energyUsage.television.usage}
+              onChange={(e) => handleEnergyUsageChange('television', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.television.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('television', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Microwave */}
         <div>
-          <label>Microwave Usage per Day:</label>
-          <input type="number" value={microwaveUsage} onChange={(e) => setMicrowaveUsage(e.target.value)} />
+          <h3>Microwave</h3>
+          <label>
+            Usage per Day:
+            <input
+              type="number"
+              value={energyUsage.microwave.usage}
+              onChange={(e) => handleEnergyUsageChange('microwave', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.microwave.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('microwave', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Air Conditioner */}
         <div>
-          <label>Air Conditioner Hours per Day:</label>
-          <input type="number" value={airConditionerHours} onChange={(e) => setAirConditionerHours(e.target.value)} />
+          <h3>Air Conditioner</h3>
+          <label>
+            Hours per Day:
+            <input
+              type="number"
+              value={energyUsage.airConditioner.usage}
+              onChange={(e) => handleEnergyUsageChange('airConditioner', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.airConditioner.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('airConditioner', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Washing Machine */}
         <div>
-          <label>Washing Machine Usage per Day:</label>
-          <input type="number" value={washingMachineUsage} onChange={(e) => setWashingMachineUsage(e.target.value)} />
+          <h3>Washing Machine</h3>
+          <label>
+            Usage per Day:
+            <input
+              type="number"
+              value={energyUsage.washingMachine.usage}
+              onChange={(e) => handleEnergyUsageChange('washingMachine', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.washingMachine.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('washingMachine', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Electric Heater */}
         <div>
-          <label>Electric Heater Hours per Day:</label>
-          <input type="number" value={electricHeaterHours} onChange={(e) => setElectricHeaterHours(e.target.value)} />
+          <h3>Electric Heater</h3>
+          <label>
+            Hours per Day:
+            <input
+              type="number"
+              value={energyUsage.electricHeater.usage}
+              onChange={(e) => handleEnergyUsageChange('electricHeater', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.electricHeater.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('electricHeater', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Vehicle Distance */}
         <div>
-          <label>Vehicle Distance per Day (in km):</label>
-          <input type="number" value={vehicleDistance} onChange={(e) => setVehicleDistance(e.target.value)} />
+          <h3>Vehicle Distance</h3>
+          <label>
+            Distance per Day (in km):
+            <input
+              type="number"
+              value={energyUsage.vehicleDistance.usage}
+              onChange={(e) => handleEnergyUsageChange('vehicleDistance', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.vehicleDistance.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('vehicleDistance', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Dishwasher */}
         <div>
-          <label>Dishwasher Usage per Day:</label>
-          <input type="number" value={dishwasherUsage} onChange={(e) => setDishwasherUsage(e.target.value)} />
+          <h3>Dishwasher</h3>
+          <label>
+            Usage per Day:
+            <input
+              type="number"
+              value={energyUsage.dishwasher.usage}
+              onChange={(e) => handleEnergyUsageChange('dishwasher', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.dishwasher.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('dishwasher', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Computer */}
         <div>
-          <label>Computer Hours per Day:</label>
-          <input type="number" value={computerHours} onChange={(e) => setComputerHours(e.target.value)} />
+          <h3>Computer</h3>
+          <label>
+            Hours per Day:
+            <input
+              type="number"
+              value={energyUsage.computer.usage}
+              onChange={(e) => handleEnergyUsageChange('computer', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.computer.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('computer', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Electric Stove */}
         <div>
-          <label>Electric Stove Usage per Day:</label>
-          <input type="number" value={electricStoveUsage} onChange={(e) => setElectricStoveUsage(e.target.value)} />
+          <h3>Electric Stove</h3>
+          <label>
+            Usage per Day:
+            <input
+              type="number"
+              value={energyUsage.electricStove.usage}
+              onChange={(e) => handleEnergyUsageChange('electricStove', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.electricStove.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('electricStove', e.target.value)}
+            />
+          </label>
         </div>
+
+        {/* Shared Vehicle Usage */}
         <div>
-          <label>Shared Vehicle Distance per Day (in km):</label>
-          <input type="number" value={sharedVehicleUsage} onChange={(e) => setSharedVehicleUsage(e.target.value)} />
+          <h3>Shared Vehicle Usage</h3>
+          <label>
+            Distance per Day (in km):
+            <input
+              type="number"
+              value={energyUsage.sharedVehicleUsage.usage}
+              onChange={(e) => handleEnergyUsageChange('sharedVehicleUsage', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Energy (kWh):
+            <input
+              type="number"
+              value={energyUsage.sharedVehicleUsage.savedEnergy}
+              onChange={(e) => handleSavedEnergyChange('sharedVehicleUsage', e.target.value)}
+            />
+          </label>
         </div>
-        <button type="submit">Calculate Total Energy Consumption</button>
+
+        <button type="submit">Calculate</button>
       </form>
-      {totalEnergyConsumption > 0 && (
-        <div>
+
+      {showOutput && (
+        <>
+          <h3>Results</h3>
           <p>Total Energy Consumption: {totalEnergyConsumption.toFixed(2)} kWh</p>
           <p>Consumption Range: {consumptionRange}</p>
           <p>Percentage Change from Average Consumption: {consumptionChange.toFixed(2)}%</p>
-          {consumptionRange === 'High' && <p>Your energy consumption is high. Consider reducing usage or switching to more energy-efficient appliances.</p>}
+
+          {consumptionRange === 'High' && (
+            <p>Your energy consumption is high. Consider reducing usage or switching to more energy-efficient appliances.</p>
+          )}
           {consumptionRange === 'Low' && <p>Congratulations! Your energy consumption is below average. Keep up the good work!</p>}
-        </div>
+
+          <h4>Suggestions:</h4>
+          <ul>
+            {suggestions.map((suggestion, index) => (
+              <li key={index}>{suggestion}</li>
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );

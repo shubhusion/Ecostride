@@ -31,7 +31,7 @@ function ActionSections() {
       
       <Link to="/water-conservation" style={{ textDecoration: 'none' }}>
         <div className="action-section">
-          <h3>Water Conservation</h3>
+          <h3>Water Footprint Calculator</h3>
           </div>
       </Link>
     </div>

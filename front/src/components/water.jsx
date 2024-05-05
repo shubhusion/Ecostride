@@ -1,86 +1,242 @@
 import React, { useState } from 'react';
-import './water.css';
 
-
-const WaterFootprintTracker = () => {
+const Water = () => {
   const [waterUsage, setWaterUsage] = useState({
-    drinking: 0,
-    washing: 0,
-    laundry: 0,
-    cleaning: 0,
-    other: 0
+    bathing: { usage: '', savedWater: '' },
+    cooking: { usage: '', savedWater: '' },
+    laundry: { usage: '', savedWater: '' },
+    dishwashing: { usage: '', savedWater: '' },
+    flushing: { usage: '', savedWater: '' },
+    gardening: { usage: '', savedWater: '' },
   });
 
-  const [totalFootprint, setTotalFootprint] = useState(0);
-  const [reductionPercentage, setReductionPercentage] = useState(0);
-  const [conservationPercentage, setConservationPercentage] = useState(0);
+  const [showOutput, setShowOutput] = useState(false);
 
-  const calculateTotalFootprint = () => {
-    const total = Object.values(waterUsage).reduce((acc, curr) => acc + curr, 0);
-    setTotalFootprint(total);
-  };
-
-  const handleWaterUsageChange = (activity, amount) => {
-    setWaterUsage(prevUsage => ({
-      ...prevUsage,
-      [activity]: amount
+  const handleWaterUsageChange = (option, value) => {
+    setWaterUsage((prevState) => ({
+      ...prevState,
+      [option]: {
+        ...prevState[option],
+        usage: value,
+      },
     }));
   };
 
-  const calculateReduction = () => {
-    // Calculate the total water usage before reduction
-    const initialTotal = Object.values(waterUsage).reduce((acc, curr) => acc + curr, 0);
+  const handleSavedWaterChange = (option, value) => {
+    setWaterUsage((prevState) => ({
+      ...prevState,
+      [option]: {
+        ...prevState[option],
+        savedWater: value,
+      },
+    }));
+  };
 
-    // Assuming a 10% reduction in total water footprint
-    const reducedTotal = initialTotal * 0.9;
+  const calculateWaterFootprint = () => {
+    let totalUsage = 0;
+    let totalSavedWater = 0;
 
-    // Calculate the reduction percentage
-    const reduction = initialTotal - reducedTotal;
-    const reductionPercentage = (reduction / initialTotal) * 100;
+    for (const option in waterUsage) {
+      totalUsage += parseFloat(waterUsage[option].usage) || 0;
+      totalSavedWater += parseFloat(waterUsage[option].savedWater) || 0;
+    }
 
-    // Set the reduction percentage state
-    setReductionPercentage(reductionPercentage);
+    return { totalUsage, totalSavedWater };
+  };
 
-    // Calculate the conservation percentage
-    const conservationPercentage = 100 - reductionPercentage;
-    setConservationPercentage(conservationPercentage);
+  const { totalUsage, totalSavedWater } = showOutput ? calculateWaterFootprint() : { totalUsage: 0, totalSavedWater: 0 };
+
+  const suggestWaterSavingTips = () => {
+    const suggestions = [];
+
+    if (parseFloat(waterUsage.bathing.usage) > 50) {
+      suggestions.push('Take shorter showers to reduce water usage.');
+    }
+
+    if (parseFloat(waterUsage.cooking.usage) > 20) {
+      suggestions.push('Use only the necessary amount of water for cooking.');
+    }
+
+    if (parseFloat(waterUsage.laundry.usage) > 30) {
+      suggestions.push('Wash full loads of laundry to save water.');
+    }
+
+    if (parseFloat(waterUsage.dishwashing.usage) > 20) {
+      suggestions.push('Use a sink or basin instead of running water for dishwashing.');
+    }
+
+    if (parseFloat(waterUsage.flushing.usage) > 10) {
+      suggestions.push('Consider installing a low-flow toilet or using a toilet tank bank.');
+    }
+
+    if (parseFloat(waterUsage.gardening.usage) > 50) {
+      suggestions.push('Water your garden in the early morning or evening to reduce evaporation.');
+    }
+
+    return suggestions;
+  };
+
+  const suggestions = showOutput ? suggestWaterSavingTips() : [];
+
+  const handleCalculate = () => {
+    setShowOutput(true);
   };
 
   return (
-    <div className="water-footprint-tracker">
-      <h2>Water Footprint Tracker</h2>
-      <div className="activity">
-        <label>Drinking:</label>
-        <input type="number" value={waterUsage.drinking} onChange={(e) => handleWaterUsageChange('drinking', parseInt(e.target.value))} />
-        liters per day
+    <div>
+      <h2>Water Footprint Calculator</h2>
+
+      {/* Bathing */}
+      <div>
+        <h3>Bathing</h3>
+        <label>
+          Water Usage (liters):
+          <input
+            type="number"
+            value={waterUsage.bathing.usage}
+            onChange={(e) => handleWaterUsageChange('bathing', e.target.value)}
+          />
+        </label>
+        <label>
+          Saved Water (liters):
+          <input
+            type="number"
+            value={waterUsage.bathing.savedWater}
+            onChange={(e) => handleSavedWaterChange('bathing', e.target.value)}
+          />
+        </label>
       </div>
-      <div className="activity">
-        <label>Washing:</label>
-        <input type="number" value={waterUsage.washing} onChange={(e) => handleWaterUsageChange('washing', parseInt(e.target.value))} />
-        liters per day
+
+      {/* Cooking */}
+      <div>
+        <h3>Cooking</h3>
+        <label>
+          Water Usage (liters):
+          <input
+            type="number"
+            value={waterUsage.cooking.usage}
+            onChange={(e) => handleWaterUsageChange('cooking', e.target.value)}
+          />
+        </label>
+        <label>
+          Saved Water (liters):
+          <input
+            type="number"
+            value={waterUsage.cooking.savedWater}
+            onChange={(e) => handleSavedWaterChange('cooking', e.target.value)}
+          />
+        </label>
       </div>
-      <div className="activity">
-        <label>Laundry:</label>
-        <input type="number" value={waterUsage.laundry} onChange={(e) => handleWaterUsageChange('laundry', parseInt(e.target.value))} />
-        liters per day
+
+      {/* Laundry */}
+      <div>
+        <h3>Laundry</h3>
+        <label>
+          Water Usage (liters):
+          <input
+            type="number"
+            value={waterUsage.laundry.usage}
+            onChange={(e) => handleWaterUsageChange('laundry', e.target.value)}
+          />
+        </label>
+        <label>
+          Saved Water (liters):
+          <input
+            type="number"
+            value={waterUsage.laundry.savedWater}
+            onChange={(e) => handleSavedWaterChange('laundry', e.target.value)}
+          />
+        </label>
       </div>
-      <div className="activity">
-        <label>Cleaning:</label>
-        <input type="number" value={waterUsage.cleaning} onChange={(e) => handleWaterUsageChange('cleaning', parseInt(e.target.value))} />
-        liters per day
+
+      {/* Dishwashing */}
+      <div>
+        <h3>Dishwashing</h3>
+        <label>
+          Water Usage (liters):
+          <input
+            type="number"
+            value={waterUsage.dishwashing.usage}
+            onChange={(e) => handleWaterUsageChange('dishwashing', e.target.value)}
+          />
+        </label>
+        <label>
+          Saved Water (liters):
+          <input
+            type="number"
+            value={waterUsage.dishwashing.savedWater}
+            onChange={(e) => handleSavedWaterChange('dishwashing', e.target.value)}
+          />
+        </label>
       </div>
-      <div className="activity">
-        <label>Other:</label>
-        <input type="number" value={waterUsage.other} onChange={(e) => handleWaterUsageChange('other', parseInt(e.target.value))} />
-        liters per day
+
+      {/* Flushing */}
+      <div>
+        <h3>Flushing</h3>
+        <label>
+          Water Usage (liters):
+          <input
+            type="number"
+            value={waterUsage.flushing.usage}
+            onChange={(e) => handleWaterUsageChange('flushing', e.target.value)}
+          />
+        </label>
+        <label>
+          Saved Water (liters):
+          <input
+            type="number"
+            value={waterUsage.flushing.savedWater}
+            onChange={(e) => handleSavedWaterChange('flushing', e.target.value)}
+          />
+        </label>
       </div>
-      <button onClick={calculateTotalFootprint}>Calculate Total Footprint</button>
-      {totalFootprint > 0 && <p>Total Water Footprint: {totalFootprint} liters per day</p>}
-      <button onClick={calculateReduction}>Calculate Reduction</button>
-      {reductionPercentage > 0 && <p>By implementing measures, you could reduce your water footprint by {reductionPercentage.toFixed(2)}%.</p>}
-      {conservationPercentage > 0 && <p>You would conserve {conservationPercentage.toFixed(2)}% of water by implementing the measures.</p>}
+
+      {/* Gardening */}
+      <div>
+        <h3>Gardening</h3>
+        <label>
+          Water Usage (liters):
+          <input
+            type="number"
+            value={waterUsage.gardening.usage}
+            onChange={(e) => handleWaterUsageChange('gardening', e.target.value)}
+          />
+        </label>
+        <label>
+          Saved Water (liters):
+          <input
+            type="number"
+            value={waterUsage.gardening.savedWater}
+            onChange={(e) => handleSavedWaterChange('gardening', e.target.value)}
+          />
+        </label>
+      </div>
+
+      <button onClick={handleCalculate}>Calculate</button>
+
+      {showOutput && (
+        <>
+          <h3>Results</h3>
+          <p>Total Water Usage: {totalUsage} liters</p>
+          <p>Total Saved Water: {totalSavedWater} liters</p>
+
+          {totalUsage < 100 ? (
+            <p>Your water footprint is low. Keep up the good work!</p>
+          ) : totalUsage < 200 ? (
+            <p>Your water footprint is average.</p>
+          ) : (
+            <p>Your water footprint is high. Consider reducing water usage.</p>
+          )}
+
+          <h4>Suggestions:</h4>
+          <ul>
+            {suggestions.map((suggestion, index) => (
+              <li key={index}>{suggestion}</li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
-};
-
-export default WaterFootprintTracker;
+}
+export default Water;
