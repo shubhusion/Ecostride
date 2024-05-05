@@ -7,6 +7,7 @@ import Company from './company';
 
 const Sustain = () => {
   const [activeTab, setActiveTab] = useState('All');
+  const [cart, setCart] = useState([]);
 
   const products = [
     { productId: 1, name: 'T-Shirt', description: 'Cotton T-Shirt', price: 20, categoryId: 'Recycled Active Wear', imageUrl: 'https://example.com/tshirt.jpg', inStock: true },
@@ -122,6 +123,12 @@ const Sustain = () => {
   // Function to filter products based on category
   const filteredProducts = activeTab === 'All' ? products : products.filter(product => product.categoryId === activeTab);
 
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+
   return (
     <>
     <Header />
@@ -186,6 +193,7 @@ const Sustain = () => {
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <p>${product.price}</p>
+              <button onClick={() => addToCart(product)}>Add to Cart</button>
             </div>
           </div>
         ))}
