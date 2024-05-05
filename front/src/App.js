@@ -7,7 +7,9 @@ import Calendar from './components/Calendar';
 import Water from './components/water';
 import Waste from './components/Waste';
 import Carb from './components/Carb';
-import SignIn from './components/signin'; // assuming your component name is SignIn
+import SignIn from './components/signin';
+import Energy from './components/energy';
+import Login from './components/login';
 
 function App() {
   return (
@@ -19,9 +21,9 @@ function App() {
           </div>
         )} />
         <Route path="/carbon-footprint" element={<Carb />} />
-        {/* <Route path="/energy-saved" component={EnergySaved} /> */}
+        <Route path="/energy-saved" element={<Energy />} />
         <Route path="/waste-reduction-progress" element={<Waste />} />
-        {/* <Route path="/sustainable-shopping" component={SustainableShopping} /> */}
+        <Route path="/sustainable-shopping" element={<Login />} />
         <Route path="/water-conservation" element={<Water />} />
         <Route path="/signin" element={<SignIn />} /> {/* Route for SignIn */}
       </Routes>

@@ -15,7 +15,7 @@ function ActionSections() {
       </Link>
       <Link to="/energy-saved" style={{ textDecoration: 'none' }}>
         <div className="action-section">
-          <h3>Energy Saved</h3>
+          <h3>Energy Consumption</h3>
           </div>
       </Link>
       <Link to="/waste-reduction-progress" style={{ textDecoration: 'none' }}>
