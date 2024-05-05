@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema(
   {
-    productId: { type: Number, unique: true, required: true }, // Use productId as primary identifier
+    productId: { type: Number, unique: true}, // Use productId as primary identifier
     name: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
+    categoryName: { type: String , required: true},
     categoryId: { type: Number }, // Store categoryId instead of ObjectId
     imageUrl: { type: String, required: true },
     inStock: { type: Boolean, required: true, default: true },
   },
   {
     timestamps: true,
-    _id: false // Disable default _id field
   }
 );
 

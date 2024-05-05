@@ -6,6 +6,7 @@ const {
   getProductById,
   updateProduct,
   deleteProduct,
+  getProductsByCategoryName
 } = require('../controllers/productController');
 
 // Create a new product
@@ -22,5 +23,8 @@ router.put('/:productId', updateProduct);
 
 // Delete a product
 router.delete('/:productId', deleteProduct);
+
+// Get products by category name
+router.get('/find/:categoryName', getProductsByCategoryName);
 
 module.exports = router;

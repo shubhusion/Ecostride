@@ -3,8 +3,8 @@ const Product = require('../models/product');
 // Create a new product
 exports.createProduct = async (req, res) => {
   try {
-    const { name, description, price, category, imageUrl } = req.body;
-    const product = await Product.create({ name, description, price, category, imageUrl });
+    const { name, description, price, category, imageUrl , categoryName } = req.body;
+    const product = await Product.create({ name, description, price, category, imageUrl , categoryName});
     res.status(201).json(product);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -59,5 +59,16 @@ exports.deleteProduct = async (req, res) => {
     res.json({ message: 'Product deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+// Get products by category name
+exports.getProductsByCategoryName = async (req, res) => {
+  const { categoryName } = req.params;
+  try {
+    const products = await Product.find({ categoryName });
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
