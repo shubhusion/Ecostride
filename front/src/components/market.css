@@ -24,6 +24,15 @@
   background-position: center;
 }
 
+.category-link{
+  color: whitesmoke;
+}
+
+.category-link:hover{
+  transform: scale(1.2);
+  color:black
+}
+
 .market-card:hover{
   transform: scale(1.1);
   color:black

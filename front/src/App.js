@@ -10,6 +10,8 @@ import Carb from './components/Carb';
 import SignIn from './components/signin';
 import Energy from './components/energy';
 import Login from './components/login';
+import Clothes from './components/clothes';
+import Sustain from './components/sustain';
 
 function App() {
   return (
@@ -20,12 +22,18 @@ function App() {
             <Home />
           </div>
         )} />
-        <Route path="/carbon-footprint" element={<Carb />} />
+        <Route path="/carbon-footprint" element={<Carb />}/>
         <Route path="/energy-saved" element={<Energy />} />
         <Route path="/waste-reduction-progress" element={<Waste />} />
         <Route path="/sustainable-shopping" element={<Login />} />
         <Route path="/water-conservation" element={<Water />} />
-        <Route path="/signin" element={<SignIn />} /> {/* Route for SignIn */}
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/category/Sustainable Products" element={<Sustain />} />
+        <Route path="/category/Left Clothes" element={<Clothes />} />
+        <Route path="/energy-saved" element={<Energy />} />
+        <Route path="/energy-saved" element={<Energy />} />
+        <Route path="/energy-saved" element={<Energy />} />
+        <Route path="/energy-saved" element={<Energy />} />
       </Routes>
     </Router>
   );

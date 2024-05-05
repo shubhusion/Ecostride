@@ -1,108 +1,113 @@
 import React, { useState } from 'react';
-import './Waste.css';
 
-const FoodWasteTracker = () => {
+const Waste = () => {
   const [wasteData, setWasteData] = useState({
-    freshProduce: 0,
-    leftovers: 0,
-    expiredSpoiledFood: 0,
-    unusableParts: 0,
-    cookingWaste: 0,
-    packagedFood: 0,
-    unusedIngredients: 0,
-    beverages: 0,
-    expiredCondiments: 0,
-    plateWaste: 0,
+    'Compost Your Food Scrap': { action: false },
+    'Recycled Waste': { action: false },
+    'Reduced the use of Paper Bags': { action: false },
+    'Bough Goods in Bulk': { action: false },
+    'Reduced Food Wastage': { action: false },
+    'Donated Clothes': { action: false },
+    'No Plastic Bottles': { action: false },
+    'Avoided Plastic Wrappers': { action: false },
+    'Use Digital Instead Of Print': { action: false },
   });
 
-  const [wasteReductionData, setWasteReductionData] = useState({
-    freshProduce: 0,
-    leftovers: 0,
-    expiredSpoiledFood: 0,
-    unusableParts: 0,
-    cookingWaste: 0,
-    packagedFood: 0,
-    unusedIngredients: 0,
-    beverages: 0,
-    expiredCondiments: 0,
-    plateWaste: 0,
-  });
+  const [showOutput, setShowOutput] = useState(false);
 
-  const [totalWaste, setTotalWaste] = useState(0);
-  const [totalWasteReduction, setTotalWasteReduction] = useState(0);
-  const [reductionPercentage, setReductionPercentage] = useState(0);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setWasteData({ ...wasteData, [name]: parseFloat(value) });
+  const handleActionChange = (parameter, value) => {
+    setWasteData((prevData) => ({
+      ...prevData,
+      [parameter]: {
+        action: value,
+      },
+    }));
   };
 
-  const handleReductionInputChange = (e) => {
-    const { name, value } = e.target;
-    setWasteReductionData({ ...wasteReductionData, [name]: parseFloat(value) });
+  const handleCalculate = (e) => {
+    e.preventDefault();
+    setShowOutput(true);
   };
 
-  const calculateTotalWaste = () => {
-    const total = Object.values(wasteData).reduce((acc, curr) => acc + curr, 0);
-    setTotalWaste(total);
-  };
-
-  const calculateTotalWasteReduction = () => {
-    const totalReduction = Object.values(wasteReductionData).reduce((acc, curr) => acc + curr, 0);
-    setTotalWasteReduction(totalReduction);
-  };
-
-  const calculateReductionPercentage = () => {
-    if (totalWaste !== 0) {
-      const percentage = (totalWasteReduction / totalWaste) * 100;
-      setReductionPercentage(percentage.toFixed(2));
-    } else {
-      setReductionPercentage(0);
+  const calculateTotalImpact = () => {
+    let totalImpact = 0;
+    for (const parameter in wasteData) {
+      if (wasteData[parameter].action) {
+        totalImpact += 1;
+      }
     }
+    return totalImpact;
   };
+
+  const calculateCoinsEarned = (totalImpact) => {
+    // Coins earned calculation logic based on total impact
+    return totalImpact * 2; // Arbitrary calculation for demonstration purposes
+  };
+
+  const totalImpact = calculateTotalImpact();
+  const coinsEarned = calculateCoinsEarned(totalImpact);
+
+  const suggestions = [
+    'Keep up the good work! Every action you take to reduce waste makes a difference.',
+    'Consider sharing your waste reduction efforts with friends and family to inspire others.',
+    'Explore more ways to reduce waste in your daily life, such as using reusable products and supporting eco-friendly brands.',
+    'Try to involve your community in waste reduction activities by organizing clean-up events or awareness campaigns.',
+    'Educate yourself further on environmental issues and the impact of waste on ecosystems to become a more informed advocate for sustainability.',
+    'Celebrate your achievements in waste reduction, no matter how small. Every effort counts!',
+    'Reuse items whenever possible to extend their lifespan and reduce the need for new products.',
+    'Support local businesses and farmers markets to reduce packaging waste and transportation emissions.',
+    'Get creative with upcycling projects to give new life to old or discarded items.',
+  ];
+
+  const appreciationMessages = [
+    "Congratulations! You're doing an excellent job in reducing waste and making a positive impact on the environment.",
+    'Great job on taking steps to reduce waste! Your efforts contribute to a cleaner and healthier planet.',
+    'Well done! Your commitment to waste reduction is inspiring. Keep up the fantastic work!',
+    'Thank you for being a responsible citizen and making conscious choices to minimize waste. Your actions make a difference!',
+  ];
+
+  // Randomly select an appreciation message
+  const randomAppreciation = appreciationMessages[Math.floor(Math.random() * appreciationMessages.length)];
+
+  // Randomly select 3 suggestions
+  const randomSuggestions = Array.from({ length: 3 }, () => suggestions[Math.floor(Math.random() * suggestions.length)]);
 
   return (
-    <div className="food-waste-tracker">
-      <h2>Food Waste Tracker</h2>
-      {/* Input fields for waste quantities */}
-      <div className="waste-categories">
-        {/* Input fields for waste quantities */}
-        {Object.keys(wasteData).map((category) => (
-          <div key={category} className="waste-category">
-            <label>{category}:</label>
-            <input type="number" name={category} value={wasteData[category]} onChange={handleInputChange} />
+    <div>
+      <h2>Waste Reduction Calculator</h2>
+      <form onSubmit={handleCalculate}>
+        {Object.keys(wasteData).map((parameter, index) => (
+          <div key={index}>
+            <h3>{parameter}</h3>
+            <label>
+              {parameter.replace(/([a-z])([A-Z])/g, '$1 $2')} today?
+              <input
+                type="checkbox"
+                checked={wasteData[parameter].action}
+                onChange={(e) => handleActionChange(parameter, e.target.checked)}
+              />
+            </label>
           </div>
         ))}
-      </div>
+        <button type="submit">Calculate</button>
+      </form>
 
-      {/* Input fields for waste reduction */}
-      <div className="waste-reduction-categories">
-        {Object.keys(wasteReductionData).map((category) => (
-          <div key={category} className="waste-reduction-category">
-            <label>Reduce {category}:</label>
-            <input type="number" name={category} value={wasteReductionData[category]} onChange={handleReductionInputChange} />
-          </div>
-        ))}
-      </div>
-
-      <div className="action-buttons">
-        <button onClick={calculateTotalWaste}>Calculate Total Waste</button>
-        <button onClick={calculateTotalWasteReduction}>Calculate Total Waste Reduction</button>
-        <button onClick={calculateReductionPercentage}>Calculate Reduction Percentage</button>
-      </div>
-
-      {/* Display total waste, total waste reduction, and reduction percentage */}
-      <div className="total-waste">
-        <p>Total Waste: {totalWaste}</p>
-      </div>
-      <div className="total-waste-reduction">
-        <p>Total Waste Reduction: {totalWasteReduction}</p>
-      </div>
-      <div className="reduction-percentage">
-        <p>Reduction Percentage: {reductionPercentage}%</p>
-      </div>
+      {showOutput && (
+        <>
+          <h3>Results</h3>
+          <p>Total Impact: {totalImpact}</p>
+          <p>Coins Earned: {coinsEarned}</p>
+          <p>{randomAppreciation}</p>
+          <h4>Random Suggestions:</h4>
+          <ul>
+            {randomSuggestions.map((suggestion, index) => (
+              <li key={index}>{suggestion}</li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 };
 
-export default FoodWasteTracker;
+export default Waste;
