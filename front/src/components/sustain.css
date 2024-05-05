@@ -57,3 +57,22 @@
     margin: 5px 0;
   }
   
+
+   /* Add to Cart button */
+.product-info button {
+    background-color: #ba400c; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .product-info button:hover {
+    background-color: #7d2515;
+  }

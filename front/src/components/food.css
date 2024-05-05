@@ -1,4 +1,4 @@
-.clothes-container {
+.food-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,8 +58,8 @@
   }
   
   /* Add to Cart button */
-.product-info button {
-    background-color: #ba400c; /* Green */
+  .product-info button {
+    background-color: #4CAF50; /* Green */
     color: white;
     border: none;
     border-radius: 5px;
@@ -73,5 +73,6 @@
   }
   
   .product-info button:hover {
-    background-color: #7d2515;
+    background-color: #45a049;
   }
+  
