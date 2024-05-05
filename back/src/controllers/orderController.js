@@ -1,7 +1,9 @@
 const Order = require('../models/order');
 const Cart = require('../models/cart');
+const shortid = require('shortid');
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types; // Destructure ObjectId from mongoose.Types
 
-// Create a new order
 exports.createOrder = async (req, res) => {
   try {
     const { shippingAddress, paymentMethod } = req.body;
@@ -19,7 +21,7 @@ exports.createOrder = async (req, res) => {
 
     const totalAmount = cart.totalAmount;
 
-    const order = await Order.create({
+    console.log("Creating order with data:", {
       userId: req.user._id,
       products,
       totalAmount,
@@ -27,15 +29,28 @@ exports.createOrder = async (req, res) => {
       paymentMethod,
     });
 
-    // Clear the cart after creating the order
-    await Cart.findOneAndUpdate({ userId: req.user._id }, { $set: { items: [], totalAmount: 0 } });
+    const orderData = {
+      userId: req.user._id,
+      products,
+      totalAmount,
+      shippingAddress,
+      paymentMethod,
+    };
+
+    // Set validateBeforeSave option to false to bypass validation
+    const order = await Order.create(orderData);
+
+    await Cart.findOneAndUpdate(
+      { userId: req.user._id },
+      { $set: { items: [], totalAmount: 0 } }
+    );
 
     res.status(201).json(order);
   } catch (error) {
+    console.error("Error creating order:", error);
     res.status(400).json({ message: error.message });
   }
 };
-
 // Get user's orders
 exports.getUserOrders = async (req, res) => {
   try {
@@ -49,7 +64,7 @@ exports.getUserOrders = async (req, res) => {
 // Get a single order by orderId
 exports.getOrderById = async (req, res) => {
   try {
-    const order = await Order.findOne({ orderId: req.params.id });
+    const order = await Order.findOne({ orderId: req.params.orderId });
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
