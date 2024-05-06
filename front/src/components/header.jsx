@@ -1,7 +1,7 @@
 // Header.jsx
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUsers, faBullseye, faLightbulb, faShoppingCart, faSearch, faEarth, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faInfoCircle, faBullseye, faLightbulb, faShoppingCart, faSearch, faEarth, faBook } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './header.css';
 
@@ -41,9 +41,9 @@ const Header = () => {
               <FontAwesomeIcon icon={faBook} size="lg" />
               <span>Training</span>
             </Link>
-            <Link to="/goals" className="header-option" target='_blank'  style={{ textDecoration: 'none' }}>
-              <FontAwesomeIcon icon={faBullseye} size="lg" />
-              <span>Goals</span>
+            <Link to="/about" className="header-option" target='_blank'  style={{ textDecoration: 'none' }}>
+              <FontAwesomeIcon icon={faInfoCircle} size="lg" />
+              <span>About Us</span>
             </Link>
             <Link to="/feedback" className="header-option" target='_blank'  style={{ textDecoration: 'none' }}>
               <FontAwesomeIcon icon={faLightbulb} size="lg" />
@@ -67,8 +67,8 @@ const Header = () => {
               {profileDropdownOpen && (
                 <div className="dropdown-content">
                   <Link to="/login" target='_blank'  style={{ textDecoration: 'none' }}>User Login</Link>
-                  <Link to="/admin" target='_blank'  style={{ textDecoration: 'none' }}>Admin Login</Link>
-                  <Link to="/profile" target='_blank'  style={{ textDecoration: 'none' }}>User Dashboard</Link>
+                  <Link to="/adminlogin" target='_blank'  style={{ textDecoration: 'none' }}>Admin Login</Link>
+                  <Link to="/admin" target='_blank'  style={{ textDecoration: 'none' }}>Add Product</Link>
                 </div>
               )}
             </div>

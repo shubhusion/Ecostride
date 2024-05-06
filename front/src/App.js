@@ -23,6 +23,9 @@ import CartBuy from './components/cartBuy';
 import CartSell from './components/cartSell';
 import Market from './components/market';
 import Admin from './components/admin';
+import ALogin from './components/adminlogin';
+import Feedback from './components/feedback';
+import About from './components/about';
 
 function App() {
   return (
@@ -53,6 +56,9 @@ function App() {
         <Route path="/market" element={<Market />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/adminlogin" element={<ALogin />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );

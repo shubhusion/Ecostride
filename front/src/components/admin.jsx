@@ -176,10 +176,6 @@ const Admin = () => {
                 <button onClick={handleAddCategory}><i className="fas fa-plus"></i> Add Category</button>
             </div>
             <div className="crud-column">
-                <input type="number" placeholder="Category ID to Delete" value={categoryIdToDelete} onChange={(e) => setCategoryIdToDelete(e.target.value)} />
-                <button onClick={handleDeleteCategory}><i className="fas fa-trash"></i> Delete Category</button>
-            </div>
-            <div className="crud-column">
                 <input type="number" placeholder="Product ID to Update" value={productIdToUpdate} onChange={(e) => setProductIdToUpdate(e.target.value)} />
                 <input type="text" placeholder="Updated Product Name" value={updatedProductName} onChange={(e) => setUpdatedProductName(e.target.value)} />
                 <input type="text" placeholder="Updated Product Description" value={updatedProductDescription} onChange={(e) => setUpdatedProductDescription(e.target.value)} />
@@ -189,10 +185,6 @@ const Admin = () => {
                 <label htmlFor="updatedinstock">Updated In Stock: </label>
                 <input type="checkbox" id="updatedinstock" checked={updatedProductInStock} onChange={(e) => setUpdatedProductInStock(e.target.checked)} />
                 <button onClick={handleUpdateProduct}><i className="fas fa-plus"></i> Update Product</button>
-            </div>
-            <div className="crud-column">
-                <input type="number" placeholder="Category ID to Get Products" value={categoryIdToGetProducts} onChange={(e) => setCategoryIdToGetProducts(e.target.value)} />
-                <button onClick={handleGetProductsByCategory}><i className="fas fa-plus"></i> Get Products</button>
             </div>
         </div>
         <Footer />

@@ -1,0 +1,61 @@
+/* about.css */
+.about-container {
+    display: flex;
+    padding: 40px;
+  }
+  
+  .developers-container {
+    flex: 1;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 30px;
+  }
+  
+  .developer-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .developer-info {
+    background-color: #e5eb88;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  .developer-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .contact-info {
+    font-weight: bold;
+  }
+  
+  .social-icons {
+    margin-top: 10px;
+  }
+  
+  .social-icons a {
+    margin-right: 10px;
+  }
+  
+  .about-content {
+    flex: 3;
+    width: 70%;
+    padding: 20px;
+    text-align: justify;
+  }
+  
+  .about-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(70, 8, 33);
+    padding: 10px;
+    text-align: center;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0.5, 0.8);
+    margin-bottom: 20px;
+  }
+  
