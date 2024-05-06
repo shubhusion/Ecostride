@@ -1,0 +1,14 @@
+.waste {
+    font-size: 40px; 
+    font-weight: bold;
+    color: rgb(113, 67, 169);
+    padding: 10px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0.3, 0.4); 
+    margin-top: 20px;
+  }
+  
+  .disposal {
+    color: rgb(144, 71, 128); 
+  }
+  

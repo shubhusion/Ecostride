@@ -1,28 +1,27 @@
 import React from 'react';
-import './addop.css'
+import { Link } from 'react-router-dom';
+import './addop.css';
 
-const Addop = () =>{
-const additionalOptions = [
-    'Home',
-    'Shopping Products',
-    'Carbon Footprint Calculator',
-    'Waste Disposal',
-    'Energy Calculator',
-    'Sale',
-    'Contact'
+const Addop = () => {
+  const additionalOptions = [
+    { name: 'Home', path: '/' },
+    { name: 'Shopping Products', path: '/category/Sustainable Products' },
+    { name: 'Carbon Footprint Calculator', path: '/carbon-footprint' },
+    { name: 'Waste Disposal', path: '/waste-disposal' },
+    { name: 'Energy Calculator', path: '/energy-saved' },
+    { name: 'Sale', path: '/market' },
+    { name: 'Contact', path: '/contact' }
   ];
 
-  return(
-   
-   <div className="additional-options">
-        {additionalOptions.map((option, index) => (
-          <div key={index} className="additional-option">
-            {option}
-          </div>
-        ))}
+  return (
+    <div className="additional-options">
+      {additionalOptions.map((option, index) => (
+        <Link key={index} to={option.path} className="additional-option" target='_blank' style={{ textDecoration: 'none', color:'black'}}>
+          {option.name}
+        </Link>
+      ))}
     </div>
-
-
-   ) };
+  );
+};
 
 export default Addop;

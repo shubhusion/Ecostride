@@ -9,6 +9,7 @@ import axios from 'axios';
 const Clothes = () => {
   const [activeTab, setActiveTab] = useState('All');
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     console.log("Fetching products...");
@@ -36,6 +37,10 @@ const Clothes = () => {
       console.error('Error filtering products by category:', error);
     }
 };
+const addToCart = (product) => {
+  setCart([...cart, { ...product, quantity: 1 }]);
+};
+
 
   console.log("Rendering...");
   return (
@@ -90,6 +95,7 @@ const Clothes = () => {
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
                 <p>${product.price}</p>
+                <button onClick={() => addToCart(product)}>Add to Cart</button>
               </div>
             </div>
           ))}

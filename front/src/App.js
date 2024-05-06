@@ -19,6 +19,9 @@ import Lead from './components/lead';
 import Tin from './components/tin';
 import Iron from './components/iron';
 import Biod from './components/biod';
+import CartBuy from './components/cartBuy';
+import CartSell from './components/cartSell';
+import Market from './components/market';
 
 function App() {
   return (
@@ -44,6 +47,9 @@ function App() {
         <Route path="/category/Aluminium and Tin" element={<Tin />} />
         <Route path="/category/Iron" element={<Iron />} />
         <Route path="/category/Biodegradable Waste" element={<Biod />} />
+        <Route path="/cart" element={<CartBuy />} />
+        <Route path="/sell" element={<CartSell />} />
+        <Route path="/market" element={<Market />} />
       </Routes>
     </Router>
   );

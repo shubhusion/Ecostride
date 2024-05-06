@@ -9,6 +9,21 @@ import './home.css';
 import Banner from './banner';
 import Company from './company';
 import Addop from './addop';
+import Marketplace from './marketplace';
+import { Link } from 'react-router-dom';
+import './market.css';
+
+const categories = [
+  'Sustainable Products',
+  'Left Clothes',
+  'Remaining Food Stock',
+  'E-Waste',
+  'Plastic',
+  'Lead and Glass',
+  'Aluminium and Tin',
+  'Iron',
+  'Biodegradable Waste',
+];
 
 const Home = () => {
   return (
@@ -25,7 +40,16 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Market />
+      <Marketplace />
+      <div className="market-container">
+        {categories.map((category, index) => (
+          <div key={index} className="market-card">
+            <Link to={`/category/${category}`} className="category-link" target='_blank' style={{ textDecoration: 'none' }}>
+                <h3>{category}</h3>
+            </Link>
+          </div>
+        ))}
+      </div>
       
       <Footer />
     </>

@@ -8,7 +8,6 @@ import Company from './company';
 const Sustain = () => {
   const [activeTab, setActiveTab] = useState('All');
   const [cart, setCart] = useState([]);
-
   const products = [
     { productId: 1, name: 'T-Shirt', description: 'Cotton T-Shirt', price: 20, categoryId: 'Recycled Active Wear', imageUrl: 'https://example.com/tshirt.jpg', inStock: true },
     { productId: 2, name: 'Sweatshirt', description: 'Hooded Sweatshirt', price: 30, categoryId: 'Recycled Active Wear', imageUrl: 'https://example.com/sweatshirt.jpg', inStock: true },
