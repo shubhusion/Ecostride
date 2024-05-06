@@ -1,43 +1,41 @@
-import React, { useState } from 'react';
-import './biod.css';
+import React, { useState, useEffect } from 'react';
+import './plastic.css';
 import Header from './header';
 import Footer from './footer';
 import Company from './company';
 import Addop from './addop';
+import axios from 'axios'; // Import Axios for making HTTP requests
 
-const Biod = () => {
+const Plastic = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantities, setQuantities] = useState({});
-  const initialQuantities = {};
+  const [products, setProducts] = useState([]); // State to store fetched products
 
-  const rates = {
-    "Fruit Peels": 3,
-    "Vegetable Waste": 2,
-    "Tea Bags": 1,
-    "Coffee Grounds": 4,
-    "Paper Waste": 5,
-    "Cardboard": 4,
-    "Grass Clippings": 2,
-    "Leaves": 3,
-    "Flower Waste": 2,
-    "Eggshells": 1,
-    "Wood Scraps": 6,
-    "Sawdust": 3,
-    "Cotton Cloth": 4,
-    "Jute Bags": 5,
-    "Coconut Husk": 2,
-    "Bamboo Leaves": 3,
-    "Corn Husk": 2,
-    "Rice Husk": 3,
-    "Pine Needles": 2,
-    "Straw": 3,
-  };
+  // Fetch products by category name from the server
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/product/find/biod'); // Assuming your API endpoint is '/api/products/:categoryName'
+        console.log('Fetched products:', response.data);
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        // Handle error, e.g., show a message to the user
+      }
+    };
 
-  // Initialize quantities state
-  Object.keys(rates).forEach(item => {
-    initialQuantities[item] = 1; // Default quantity is 1 kg for each item
-  });
-  useState(() => setQuantities(initialQuantities));
+    fetchProducts();
+  }, []); // Empty dependency array to run the effect only once on component mount
+
+  // Initialize quantities state based on fetched products
+  useEffect(() => {
+    const initialQuantities = {};
+    products.forEach(product => {
+      initialQuantities[product.name] = 1; // Default quantity is 1 for each product
+    });
+    console.log('Initialized quantities:', initialQuantities);
+    setQuantities(initialQuantities);
+  }, [products]); // Run this effect whenever products state changes
 
   const handleClick = (item) => {
     setSelectedItem(item);
@@ -48,16 +46,18 @@ const Biod = () => {
     // Add logic to add the selected item and quantity to the cart
     // For example:
     // addToCart(item, quantities[item]);
-    console.log(`Added ${quantities[item]} kg of ${item} to cart.`);
+    console.log(`Added ${quantities[item]} ${item}(s) to cart.`);
   };
 
   const handleIncrement = (item) => {
     setQuantities({ ...quantities, [item]: quantities[item] + 1 });
+    console.log(`Incremented quantity of ${item} to ${quantities[item] + 1}`);
   };
 
   const handleDecrement = (item) => {
     if (quantities[item] > 1) {
       setQuantities({ ...quantities, [item]: quantities[item] - 1 });
+      console.log(`Decremented quantity of ${item} to ${quantities[item] - 1}`);
     }
   };
 
@@ -66,19 +66,19 @@ const Biod = () => {
       <Header />
       <Addop />
       <Company />
-      <div className="biod-container">
-        <h2>Choose your biodegradable waste:</h2>
+      <div className="plastic-container">
+        <h2>Choose your plastic waste:</h2>
         <div className="item-list">
-          {Object.keys(rates).map((item, index) => (
-            <div key={index} className="item" onClick={() => handleClick(item)}>
-              <h3>{item}</h3>
-              <p>Rate: ${rates[item]} per kg</p>
+          {products.map((product, index) => (
+            <div key={index} className="item" onClick={() => handleClick(product.name)}>
+              <h3>{product.name}</h3>
+              <p>Rate: ${product.price}</p> {/* Using price from the fetched product */}
               <div className="quantity-controls">
-                <button onClick={() => handleDecrement(item)}>-</button>
-                <span>{quantities[item]} kg</span>
-                <button onClick={() => handleIncrement(item)}>+</button>
+                <button onClick={() => handleDecrement(product.name)}>-</button>
+                <span>{quantities[product.name]}</span>
+                <button onClick={() => handleIncrement(product.name)}>+</button>
               </div>
-              <button className="add-to-cart" onClick={() => handleAddToCart(item)}>Add to Cart</button>
+              <button className="add-to-cart" onClick={() => handleAddToCart(product.name)}>Add to Cart</button>
             </div>
           ))}
         </div>
@@ -88,4 +88,4 @@ const Biod = () => {
   );
 };
 
-export default Biod;
+export default Plastic;
