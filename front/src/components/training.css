@@ -1,0 +1,40 @@
+/* training.css */
+.training-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px;
+  }
+  
+  .category {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .category-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .videos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+  }
+  
+  .video {
+    width: 300px;
+  }
+  
+  .video iframe {
+    border-radius: 8px;
+  }
+  
+  .video p {
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+  }
+  

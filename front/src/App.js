@@ -26,6 +26,7 @@ import Admin from './components/admin';
 import ALogin from './components/adminlogin';
 import Feedback from './components/feedback';
 import About from './components/about';
+import Training from './components/training';
 
 function App() {
   return (
@@ -59,6 +60,8 @@ function App() {
         <Route path="/adminlogin" element={<ALogin />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/about" element={<About />} />
+        <Route path="/training" element={<Training />} />
+        <Route path="/contact" element={<About />} />
       </Routes>
     </Router>
   );
