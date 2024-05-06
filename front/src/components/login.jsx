@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './login.css';
-import Header from './header';
-import Addop from './addop';
-import Company from './company';
-import Footer from './footer';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +10,7 @@ const Login = () => {
   const [name, setName] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const [errors, setErrors] = useState({});
-
+  const navigate = useNavigate();
   const validateEmail = (email) => {
     // Basic email validation regex
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -72,7 +69,7 @@ const Login = () => {
 
   const handleLoginSuccess = (email) => {
     console.log('Logged in successfully as', email);
-    // You can add more logic here, such as redirecting to another page
+    navigate('/');
   };
 
   const handleLogin = async () => {
@@ -82,10 +79,10 @@ const Login = () => {
     try {
       console.log('Logging in...');
       const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
-      const { token } = response.data;
-      console.log(token);
+      const { token, role } = response.data;
+      console.log(token, role);
       localStorage.setItem('token', token);
-      onLogin(email);
+      onLogin(email, role);
     } catch (error) {
       setErrors({ login: error.response?.data?.message || 'An unknown error occurred' });
       console.error('Login Error:', error);
@@ -94,7 +91,7 @@ const Login = () => {
       }, 5000); // Error disappears after 5 seconds
     }
   };
-
+  
   const handleSignup = async () => {
     if (!validateForm()) {
       return;
@@ -118,10 +115,6 @@ const Login = () => {
   };
 
   return (
-    <>
-    <Header />
-    <Addop />
-    <Company />
     <div className={`login-container ${isLogin ? 'login-active' : 'signup-active'}`}>
       <div className="login-toggle">
         <button className={`toggle-button ${isLogin ? 'active' : ''}`} onClick={() => setIsLogin(true)}>Login</button>
@@ -159,8 +152,6 @@ const Login = () => {
         )}
       </div>
     </div>
-    <Footer />
-    </>
   );
 };
 
