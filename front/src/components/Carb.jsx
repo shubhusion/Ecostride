@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './carbon.css';
-import Header from './header';
-import Company from './company';
-import Addop from './addop';
+import Header from './header'
+import Company from './company'
+import Addop from './addop'
 import Footer from './footer';
 
 function Carb() {
@@ -13,13 +13,16 @@ function Carb() {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
     setFormData({ ...formData, [name]: newValue });
+
+    // Add console.log to track changes in formData
+    console.log('formData:', formData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/calculate-carbon-footprint', {
+      const response = await fetch('http://localhost:5000/api/activity/calculate-carbon-footprint', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,10 +36,16 @@ function Carb() {
 
       const resultData = await response.json();
       setResult(resultData);
+
+      // Add console.log to log the result data
+      console.log('Result Data:', resultData);
     } catch (error) {
       console.error('Error:', error);
     }
   };
+
+  // Add console.log to check if result state changes
+  console.log('Result:', result);
 
   return (
     <>
@@ -44,25 +53,27 @@ function Carb() {
       <Addop />
       <Company />
       <div className="carb-container">
-        <div className="carb-title">Carbon Footprint Calculator</div>
+        <div className='carb-title'>
+          Carbon Footprint Calculator
+        </div>
         <form className="carb-form" onSubmit={handleSubmit}>
           <label htmlFor="electricBill">Monthly Electric Bill (kWh): </label>
-          <input type="number" id="electricBill" name="electricBill" onChange={handleInputChange} /><br />
+          <input type="number" id="electricBill" name="electricBill" onChange={handleInputChange} required /><br />
 
           <label htmlFor="gasBill">Monthly Gas Bill: </label>
-          <input type="number" id="gasBill" name="gasBill" onChange={handleInputChange} /><br />
+          <input type="number" id="gasBill" name="gasBill" onChange={handleInputChange} required /><br />
 
           <label htmlFor="oilBill">Monthly Oil Bill: </label>
-          <input type="number" id="oilBill" name="oilBill" onChange={handleInputChange} /><br />
+          <input type="number" id="oilBill" name="oilBill" onChange={handleInputChange} required /><br />
 
           <label htmlFor="carMileage">Total Yearly Mileage on Your Car: </label>
-          <input type="number" id="carMileage" name="carMileage" onChange={handleInputChange} /><br />
+          <input type="number" id="carMileage" name="carMileage" onChange={handleInputChange} required /><br />
 
           <label htmlFor="shortFlights">Number of Flights (4 hours or less): </label>
-          <input type="number" id="shortFlights" name="shortFlights" onChange={handleInputChange} /><br />
+          <input type="number" id="shortFlights" name="shortFlights" onChange={handleInputChange} required /><br />
 
           <label htmlFor="longFlights">Number of Flights (4 hours or more): </label>
-          <input type="number" id="longFlights" name="longFlights" onChange={handleInputChange} /><br />
+          <input type="number" id="longFlights" name="longFlights" onChange={handleInputChange} required /><br />
 
           <label htmlFor="recycleNewspaper">Do NOT Recycle Newspaper (Add 184): </label>
           <input
