@@ -36,18 +36,35 @@ exports.getProductById = async (req, res) => {
 // Update a product
 exports.updateProduct = async (req, res) => {
   try {
-    const product = await Product.findOneAndUpdate({ productId: req.params.productId }, req.body, {
+    const { productId, name, description, price, category, imageUrl, categoryName } = req.body;
+    
+    if (!productId) {
+      return res.status(400).json({ message: 'ProductId is required in the request body' });
+    }
+
+    const updatedFields = {};
+    if (name) updatedFields.name = name;
+    if (description) updatedFields.description = description;
+    if (price) updatedFields.price = price;
+    if (category) updatedFields.category = category;
+    if (imageUrl) updatedFields.imageUrl = imageUrl;
+    if (categoryName) updatedFields.categoryName = categoryName;
+
+    const product = await Product.findOneAndUpdate({ productId: productId }, updatedFields, {
       new: true,
       runValidators: true,
     });
+    
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
+    
     res.json(product);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
+
 
 // Delete a product
 exports.deleteProduct = async (req, res) => {

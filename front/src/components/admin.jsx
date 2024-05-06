@@ -30,25 +30,129 @@ const Admin = () => {
 
     const [categoryIdToGetProducts, setCategoryIdToGetProducts] = useState('');
 
-    const handleAddProduct = () => {
-        // Add product logic
+    const handleAddProduct = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/product/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: productName,
+                    description: productDescription,
+                    price: productPrice,
+                    category: productCategory,
+                    imageUrl: productImageURL,
+                    categoryName: productCategory // assuming categoryName is the same as category for now
+                })
+            });
+            if (response.ok) {
+                console.log("Product added successfully")
+                // You may want to update state or show a success message
+            } else {
+                // Handle error
+                const data = await response.json();
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error('Error adding product:', error);
+        }
     };
+    
 
-    const handleAddCategory = () => {
-        // Add category logic
+    const handleAddCategory = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/category/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: categoryName,
+                    description: categoryDescription
+                })
+            });
+            if (response.ok) {
+                console.log("Category added successfully")
+                // You may want to update state or show a success message
+            } else {
+                // Handle error
+                const data = await response.json();
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error('Error adding category:', error);
+        }
     };
+    
 
-    const handleDeleteCategory = () => {
-        // Delete category logic
+    const handleDeleteCategory = async () => {
+        try {
+            const response = await fetch(`/api/categories/${categoryIdToDelete}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                // Category deleted successfully
+                // You may want to update state or show a success message
+            } else {
+                // Handle error
+                const data = await response.json();
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error('Error deleting category:', error);
+        }
     };
+    
 
-    const handleUpdateProduct = () => {
-        // Update product logic
+    const handleUpdateProduct = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/product/`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    productId: productIdToUpdate,
+                    name: updatedProductName,
+                    description: updatedProductDescription,
+                    price: updatedProductPrice,
+                    category: updatedProductCategory,
+                    imageUrl: updatedProductImageURL,
+                    categoryName: updatedProductCategory // assuming categoryName is the same as category for now
+                })
+            });
+            if (response.ok) {
+                console.log("Product updated successfully");
+                // You may want to update state or show a success message
+            } else {
+                // Handle error
+                const data = await response.json();
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error('Error updating product:', error);
+            console.error('Error updating product');
+        }
     };
+    
 
-    const handleGetProductsByCategory = () => {
-        // Get products by category logic
+    const handleGetProductsByCategory = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/category/1`);
+            if (response.ok) {
+                const data = await response.json();
+                // Handle received products data
+            } else {
+                // Handle error
+                const data = await response.json();
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error('Error getting products by category:', error);
+        }
     };
+    
 
     return (
         <>

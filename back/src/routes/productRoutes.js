@@ -19,7 +19,7 @@ router.get('/', getAllProducts);
 router.get('/:productId', getProductById);
 
 // Update a product
-router.put('/:productId', updateProduct);
+router.put('/', updateProduct);
 
 // Delete a product
 router.delete('/:productId', deleteProduct);
