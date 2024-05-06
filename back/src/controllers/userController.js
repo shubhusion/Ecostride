@@ -51,7 +51,7 @@ exports.loginUser = async (req, res) => {
 
     try {
         const user = await User.findOne({ email });
-
+        console.log(user)
         // Check if user exists
         if (!user) {
             console.log("User not found");
@@ -69,10 +69,10 @@ exports.loginUser = async (req, res) => {
         const token = jwt.sign({ id: user._id }, 'your_secret_key', {
             expiresIn: '1d',
         });
-
+        const role = user.role;
         // Return token
-        res.json({ token });
-    } catch (error) {
+        res.json({ token , role });
+    } catch (error) { 
         console.error("Login error:", error);
         res.status(500).json({ message: error.message });
     }
