@@ -80,5 +80,5 @@ EcoStride is an educational project developed by Aditya Kumar, Shubham Sharma, a
 
 <div align="center">
   <h3>Join the Sustainable Revolution with EcoStride! 🌿</h3>
-  <img src="https://github.com/shubhusion/EcoStride-Sustainability-Living-Tracker/blob/main/front/public/images/EcoStride_logo(1).png" alt="EcoStride Banner" width="600">
+  <img src="https://github.com/shrivastavaditya/EcoStride-Sustainability-Living-Tracker/blob/main/front/public/images/EcoStride_logo(1).png" alt="EcoStride Banner" width="600">
 </div>
