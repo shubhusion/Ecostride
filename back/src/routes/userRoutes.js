@@ -11,9 +11,9 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 
 // Get user profile
-router.get('/profile', authenticateJWT, getUserProfile); // Apply the middleware
+router.get('/profile', getUserProfile); // Apply the middleware
 
 // Update user profile
-router.put('/profile', authenticateJWT, updateUserProfile); // Apply the middleware
+router.put('/profile', updateUserProfile); // Apply the middleware
 
 module.exports = router;

@@ -10,7 +10,7 @@ const Plastic = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantities, setQuantities] = useState({});
   const [products, setProducts] = useState([]); // State to store fetched products
-
+  const [cart, setCart] = useState([]);
   // Fetch products by category name from the server
   useEffect(() => {
     const fetchProducts = async () => {
@@ -42,13 +42,25 @@ const Plastic = () => {
     // You can add logic here to inform the user about the amount they will get for their selected item
   };
 
-  const handleAddToCart = (item) => {
-    // Add logic to add the selected item and quantity to the cart
-    // For example:
-    // addToCart(item, quantities[item]);
-    console.log(`Added ${quantities[item]} ${item}(s) to cart.`);
+  const handleAddToCart = (product) => {
+    const cartItem = {
+      productId: product.productId, // Use product.productId instead of product.id
+      quantity: quantities[product.name],
+    };
+    console.log(cartItem)
+    setCart(prevCart => [...prevCart, cartItem]);
+  
+    // Make the POST API call to send the cart data to the server
+    axios.post('http://localhost:5000/api/cart/', cartItem)
+      .then(response => {
+        console.log('Cart item added:', response.data);
+        // Handle successful response if needed
+      })
+      .catch(error => {
+        console.error('Error adding cart item:', error);
+        // Handle error if needed
+      });
   };
-
   const handleIncrement = (item) => {
     setQuantities({ ...quantities, [item]: quantities[item] + 1 });
     console.log(`Incremented quantity of ${item} to ${quantities[item] + 1}`);
@@ -78,7 +90,7 @@ const Plastic = () => {
                 <span>{quantities[product.name]}</span>
                 <button onClick={() => handleIncrement(product.name)}>+</button>
               </div>
-              <button className="add-to-cart" onClick={() => handleAddToCart(product.name)}>Add to Cart</button>
+              <button className="add-to-cart" onClick={() => handleAddToCart(product)}>Add to Cart</button>
             </div>
           ))}
         </div>
