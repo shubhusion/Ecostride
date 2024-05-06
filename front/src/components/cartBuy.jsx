@@ -7,6 +7,7 @@ import Addop from './addop';
 import Company from './company';
 import {loadStripe} from '@stripe/stripe-js';
 import { useNavigate } from "react-router-dom";
+import { faCartPlus, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 const CartBuy = () => {
