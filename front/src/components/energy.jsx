@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import './energy.css'
+import Header from './header';
+import Addop from './addop';
+import Company from './company';
+import Footer from './footer';
 
 const Energy = () => {
   const [energyUsage, setEnergyUsage] = useState({
@@ -87,7 +92,7 @@ const Energy = () => {
     setTotalEnergyConsumption(totalUsage);
 
     // Calculate consumption change
-    const averageConsumption = Object.values(averageWatts).reduce((acc, val) => acc + val, 0);
+    const averageConsumption = 45000.0;
     const percentageChange = ((totalUsage - averageConsumption) / averageConsumption) * 100;
     setConsumptionChange(percentageChange);
 
@@ -130,265 +135,297 @@ const Energy = () => {
   const suggestions = showOutput ? suggestEnergySavingTips() : [];
 
   return (
-    <div>
-      <h2>Energy Consumption Calculator</h2>
-      <form onSubmit={handleCalculate}>
+    <>
+    <Header />
+    <Addop />
+    <Company />
+    <div className='energy-container'>
+      <h2 className='energy-title'>Energy Consumption Calculator</h2>
+      <form className='energy-form' onSubmit={handleCalculate}>
         {/* Refrigerator */}
-        <div>
+        <div className='energy-item'>
           <h3>Refrigerator</h3>
-          <label>
-            Hours per Day:
-            <input
-              type="number"
-              value={energyUsage.refrigerator.usage}
-              onChange={(e) => handleEnergyUsageChange('refrigerator', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.refrigerator.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('refrigerator', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Hours per Day:
+              <input
+                type="number"
+                value={energyUsage.refrigerator.usage}
+                onChange={(e) => handleEnergyUsageChange('refrigerator', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.refrigerator.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('refrigerator', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Television */}
-        <div>
+        <div className='energy-item'>
           <h3>Television</h3>
-          <label>
-            Hours per Day:
-            <input
-              type="number"
-              value={energyUsage.television.usage}
-              onChange={(e) => handleEnergyUsageChange('television', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.television.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('television', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Hours per Day:
+              <input
+                type="number"
+                value={energyUsage.television.usage}
+                onChange={(e) => handleEnergyUsageChange('television', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.television.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('television', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Microwave */}
-        <div>
+        <div className='energy-item'>
           <h3>Microwave</h3>
-          <label>
-            Usage per Day:
-            <input
-              type="number"
-              value={energyUsage.microwave.usage}
-              onChange={(e) => handleEnergyUsageChange('microwave', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.microwave.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('microwave', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Usage per Day:
+              <input
+                type="number"
+                value={energyUsage.microwave.usage}
+                onChange={(e) => handleEnergyUsageChange('microwave', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.microwave.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('microwave', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Air Conditioner */}
-        <div>
+        <div className='energy-item'>
           <h3>Air Conditioner</h3>
-          <label>
-            Hours per Day:
-            <input
-              type="number"
-              value={energyUsage.airConditioner.usage}
-              onChange={(e) => handleEnergyUsageChange('airConditioner', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.airConditioner.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('airConditioner', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Hours per Day:
+              <input
+                type="number"
+                value={energyUsage.airConditioner.usage}
+                onChange={(e) => handleEnergyUsageChange('airConditioner', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.airConditioner.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('airConditioner', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Washing Machine */}
-        <div>
+        <div className='energy-item'>
           <h3>Washing Machine</h3>
-          <label>
-            Usage per Day:
-            <input
-              type="number"
-              value={energyUsage.washingMachine.usage}
-              onChange={(e) => handleEnergyUsageChange('washingMachine', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.washingMachine.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('washingMachine', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Usage per Day:
+              <input
+                type="number"
+                value={energyUsage.washingMachine.usage}
+                onChange={(e) => handleEnergyUsageChange('washingMachine', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.washingMachine.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('washingMachine', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Electric Heater */}
-        <div>
+        <div className='energy-item'>
           <h3>Electric Heater</h3>
-          <label>
-            Hours per Day:
-            <input
-              type="number"
-              value={energyUsage.electricHeater.usage}
-              onChange={(e) => handleEnergyUsageChange('electricHeater', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.electricHeater.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('electricHeater', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Hours per Day:
+              <input
+                type="number"
+                value={energyUsage.electricHeater.usage}
+                onChange={(e) => handleEnergyUsageChange('electricHeater', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.electricHeater.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('electricHeater', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Vehicle Distance */}
-        <div>
+        <div className='energy-item'>
           <h3>Vehicle Distance</h3>
-          <label>
-            Distance per Day (in km):
-            <input
-              type="number"
-              value={energyUsage.vehicleDistance.usage}
-              onChange={(e) => handleEnergyUsageChange('vehicleDistance', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.vehicleDistance.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('vehicleDistance', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Distance (in km):
+              <input
+                type="number"
+                value={energyUsage.vehicleDistance.usage}
+                onChange={(e) => handleEnergyUsageChange('vehicleDistance', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.vehicleDistance.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('vehicleDistance', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Dishwasher */}
-        <div>
+        <div className='energy-item'>
           <h3>Dishwasher</h3>
-          <label>
-            Usage per Day:
-            <input
-              type="number"
-              value={energyUsage.dishwasher.usage}
-              onChange={(e) => handleEnergyUsageChange('dishwasher', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.dishwasher.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('dishwasher', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Usage per Day:
+              <input
+                type="number"
+                value={energyUsage.dishwasher.usage}
+                onChange={(e) => handleEnergyUsageChange('dishwasher', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.dishwasher.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('dishwasher', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Computer */}
-        <div>
+        <div className='energy-item'>
           <h3>Computer</h3>
-          <label>
-            Hours per Day:
-            <input
-              type="number"
-              value={energyUsage.computer.usage}
-              onChange={(e) => handleEnergyUsageChange('computer', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.computer.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('computer', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Hours per Day:
+              <input
+                type="number"
+                value={energyUsage.computer.usage}
+                onChange={(e) => handleEnergyUsageChange('computer', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.computer.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('computer', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Electric Stove */}
-        <div>
+        <div className='energy-item'>
           <h3>Electric Stove</h3>
-          <label>
-            Usage per Day:
-            <input
-              type="number"
-              value={energyUsage.electricStove.usage}
-              onChange={(e) => handleEnergyUsageChange('electricStove', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.electricStove.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('electricStove', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Usage per Day:
+              <input
+                type="number"
+                value={energyUsage.electricStove.usage}
+                onChange={(e) => handleEnergyUsageChange('electricStove', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.electricStove.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('electricStove', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Shared Vehicle Usage */}
-        <div>
+        <div className='energy-item'>
           <h3>Shared Vehicle Usage</h3>
-          <label>
-            Distance per Day (in km):
-            <input
-              type="number"
-              value={energyUsage.sharedVehicleUsage.usage}
-              onChange={(e) => handleEnergyUsageChange('sharedVehicleUsage', e.target.value)}
-            />
-          </label>
-          <label>
-            Saved Energy (kWh):
-            <input
-              type="number"
-              value={energyUsage.sharedVehicleUsage.savedEnergy}
-              onChange={(e) => handleSavedEnergyChange('sharedVehicleUsage', e.target.value)}
-            />
-          </label>
+          <div className='energyinputs'>
+            <label>
+              Distance (in km):
+              <input
+                type="number"
+                value={energyUsage.sharedVehicleUsage.usage}
+                onChange={(e) => handleEnergyUsageChange('sharedVehicleUsage', e.target.value)}
+              />
+            </label>
+            <label>
+              Saved Energy (kWh):
+              <input
+                type="number"
+                value={energyUsage.sharedVehicleUsage.savedEnergy}
+                onChange={(e) => handleSavedEnergyChange('sharedVehicleUsage', e.target.value)}
+              />
+            </label>
+          </div>
         </div>
 
-        <button type="submit">Calculate</button>
+        <button type="submit" className='calculate-button'>Calculate</button>
       </form>
 
+      <div className='output-container'>
       {showOutput && (
         <>
-          <h3>Results</h3>
-          <p>Total Energy Consumption: {totalEnergyConsumption.toFixed(2)} kWh</p>
-          <p>Consumption Range: {consumptionRange}</p>
-          <p>Percentage Change from Average Consumption: {consumptionChange.toFixed(2)}%</p>
+          <h3 className="output-title">Results</h3>
+          <p className="output-text">Total Energy Consumption: {totalEnergyConsumption.toFixed(2)} kWh</p>
+          <p className="output-text">Consumption Range: {consumptionRange}</p>
+          <p className="output-text">Percentage Change from Average Consumption: {consumptionChange.toFixed(2)}%</p>
 
           {consumptionRange === 'High' && (
-            <p>Your energy consumption is high. Consider reducing usage or switching to more energy-efficient appliances.</p>
+            <p className="output-text high-consumption">Your energy consumption is high. Consider reducing usage or switching to more energy-efficient appliances.</p>
           )}
-          {consumptionRange === 'Low' && <p>Congratulations! Your energy consumption is below average. Keep up the good work!</p>}
+          {consumptionRange === 'Low' && <p className="output-text low-consumption">Congratulations! Your energy consumption is below average. Keep up the good work!</p>}
 
-          <h4>Suggestions:</h4>
-          <ul>
+          <h4 className="output-subtitle">Suggestions:</h4>
+          <ul className="output-list">
             {suggestions.map((suggestion, index) => (
-              <li key={index}>{suggestion}</li>
+              <li key={index} className="output-list-item">{suggestion}</li>
             ))}
           </ul>
         </>
       )}
     </div>
+
+    </div>
+    <Footer />
+    </>
   );
 };
 
 export default Energy;
+

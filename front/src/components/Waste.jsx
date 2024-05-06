@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import './Waste.css';
+import Header from './header';
+import Addop from './addop';
+import Company from './company';
+import Footer from './footer';
+
 
 const Waste = () => {
   const [wasteData, setWasteData] = useState({
@@ -73,15 +79,20 @@ const Waste = () => {
   const randomSuggestions = Array.from({ length: 3 }, () => suggestions[Math.floor(Math.random() * suggestions.length)]);
 
   return (
-    <div>
-      <h2>Waste Reduction Calculator</h2>
-      <form onSubmit={handleCalculate}>
+    <>
+    <Header />
+    <Addop />
+    <Company />
+    <div className="waste-container">
+      <h2 className="waste-title">Waste Reduction Calculator</h2>
+      <form className="waste-form" onSubmit={handleCalculate}>
         {Object.keys(wasteData).map((parameter, index) => (
-          <div key={index}>
+          <div className="waste-item" key={index}>
             <h3>{parameter}</h3>
             <label>
               {parameter.replace(/([a-z])([A-Z])/g, '$1 $2')} today?
               <input
+                className="waste-checkbox"
                 type="checkbox"
                 checked={wasteData[parameter].action}
                 onChange={(e) => handleActionChange(parameter, e.target.checked)}
@@ -89,24 +100,26 @@ const Waste = () => {
             </label>
           </div>
         ))}
-        <button type="submit">Calculate</button>
+        <button className="waste-calculate-button" type="submit">Calculate</button>
       </form>
 
       {showOutput && (
-        <>
-          <h3>Results</h3>
-          <p>Total Impact: {totalImpact}</p>
-          <p>Coins Earned: {coinsEarned}</p>
-          <p>{randomAppreciation}</p>
-          <h4>Random Suggestions:</h4>
-          <ul>
+        <div className="waste-output-container">
+          <h3 className="waste-output-title">Results</h3>
+          <p className="waste-output-text">Total Impact: {totalImpact}</p>
+          <p className="waste-output-text">Coins Earned: {coinsEarned}</p>
+          <p className="waste-output-appreciation">{randomAppreciation}</p>
+          <h4 className="waste-output-subtitle">Random Suggestions:</h4>
+          <ul className="waste-output-list">
             {randomSuggestions.map((suggestion, index) => (
-              <li key={index}>{suggestion}</li>
+              <li className="waste-output-list-item" key={index}>{suggestion}</li>
             ))}
           </ul>
-        </>
+        </div>
       )}
     </div>
+    <Footer />
+    </>
   );
 };
 

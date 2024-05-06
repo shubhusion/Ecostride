@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import './water.css'; // Import the CSS file
+import Header from './header';
+import Addop from './addop';
+import Company from './company';
+import Footer from './footer';
 
 const Water = () => {
   const [waterUsage, setWaterUsage] = useState({
@@ -83,54 +88,67 @@ const Water = () => {
   };
 
   return (
-    <div>
-      <h2>Water Footprint Calculator</h2>
+    <>
+    <Header />
+    <Addop />
+    <Company />
+    <div className="water-container"> {/* Add water-container class */}
+      <h2 className='water-title'>Water Footprint Calculator</h2>
 
+      <form className='water-form'>
       {/* Bathing */}
-      <div>
-        <h3>Bathing</h3>
-        <label>
-          Water Usage (liters):
-          <input
-            type="number"
-            value={waterUsage.bathing.usage}
-            onChange={(e) => handleWaterUsageChange('bathing', e.target.value)}
-          />
-        </label>
-        <label>
-          Saved Water (liters):
-          <input
-            type="number"
-            value={waterUsage.bathing.savedWater}
-            onChange={(e) => handleSavedWaterChange('bathing', e.target.value)}
-          />
-        </label>
-      </div>
+      {/* Add water-input-row class */}
+        <div className="water-item">
+          <h3>Bathing</h3>
+          <div className='water-input-row'>
+          <label>
+            Water Usage (liters):
+            <input
+              type="number"
+              value={waterUsage.bathing.usage}
+              onChange={(e) => handleWaterUsageChange('bathing', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Water (liters):
+            <input
+              type="number"
+              value={waterUsage.bathing.savedWater}
+              onChange={(e) => handleSavedWaterChange('bathing', e.target.value)}
+            />
+          </label>
+          </div>
+        </div>
 
-      {/* Cooking */}
-      <div>
-        <h3>Cooking</h3>
-        <label>
-          Water Usage (liters):
-          <input
-            type="number"
-            value={waterUsage.cooking.usage}
-            onChange={(e) => handleWaterUsageChange('cooking', e.target.value)}
-          />
-        </label>
-        <label>
-          Saved Water (liters):
-          <input
-            type="number"
-            value={waterUsage.cooking.savedWater}
-            onChange={(e) => handleSavedWaterChange('cooking', e.target.value)}
-          />
-        </label>
-      </div>
+        {/* Cooking */}
+        <div className="water-item"> {/* Add water-input class */}
+          <h3>Cooking</h3>
+          <div className='water-input-row'>
+          <label>
+            Water Usage (liters):
+            <input
+              type="number"
+              value={waterUsage.cooking.usage}
+              onChange={(e) => handleWaterUsageChange('cooking', e.target.value)}
+            />
+          </label>
+          <label>
+            Saved Water (liters):
+            <input
+              type="number"
+              value={waterUsage.cooking.savedWater}
+              onChange={(e) => handleSavedWaterChange('cooking', e.target.value)}
+            />
+          </label>
+          </div>
+        </div>
+      
 
       {/* Laundry */}
+      <div className="water-item"> 
       <div>
         <h3>Laundry</h3>
+        <div className='water-input-row'>
         <label>
           Water Usage (liters):
           <input
@@ -147,11 +165,15 @@ const Water = () => {
             onChange={(e) => handleSavedWaterChange('laundry', e.target.value)}
           />
         </label>
+        </div>
+      </div>
       </div>
 
       {/* Dishwashing */}
+      <div className="water-item"> 
       <div>
         <h3>Dishwashing</h3>
+        <div className='water-input-row'>
         <label>
           Water Usage (liters):
           <input
@@ -168,11 +190,15 @@ const Water = () => {
             onChange={(e) => handleSavedWaterChange('dishwashing', e.target.value)}
           />
         </label>
+        </div>
+      </div>
       </div>
 
       {/* Flushing */}
+      <div className="water-item"> 
       <div>
         <h3>Flushing</h3>
+        <div className='water-input-row'>
         <label>
           Water Usage (liters):
           <input
@@ -190,10 +216,16 @@ const Water = () => {
           />
         </label>
       </div>
+      </div>
+      </div>
+
+       
 
       {/* Gardening */}
+      <div className="water-item"> 
       <div>
         <h3>Gardening</h3>
+        <div className='water-input-row'>
         <label>
           Water Usage (liters):
           <input
@@ -210,33 +242,39 @@ const Water = () => {
             onChange={(e) => handleSavedWaterChange('gardening', e.target.value)}
           />
         </label>
+        </div>
       </div>
-
+      </div>
+      </form>
       <button onClick={handleCalculate}>Calculate</button>
 
       {showOutput && (
-        <>
-          <h3>Results</h3>
-          <p>Total Water Usage: {totalUsage} liters</p>
-          <p>Total Saved Water: {totalSavedWater} liters</p>
+        <div className="output-container">
+          <h3 className="output-title">Results</h3>
+          <p className="output-text">Total Water Usage: {totalUsage} liters</p>
+          <p className="output-text">Total Saved Water: {totalSavedWater} liters</p>
 
           {totalUsage < 100 ? (
-            <p>Your water footprint is low. Keep up the good work!</p>
+            <p className="output-text low-consumption">Your water footprint is low. Keep up the good work!</p>
           ) : totalUsage < 200 ? (
-            <p>Your water footprint is average.</p>
+            <p className="output-text">Your water footprint is average.</p>
           ) : (
-            <p>Your water footprint is high. Consider reducing water usage.</p>
+            <p className="output-text high-consumption">Your water footprint is high. Consider reducing water usage.</p>
           )}
 
-          <h4>Suggestions:</h4>
-          <ul>
+          <h4 className="output-subtitle">Suggestions:</h4>
+          <ul className="output-list">
             {suggestions.map((suggestion, index) => (
-              <li key={index}>{suggestion}</li>
+              <li key={index} className="output-list-item">{suggestion}</li>
             ))}
           </ul>
-        </>
+        </div>
       )}
+
     </div>
+    <Footer />
+    </>
   );
-}
+};
+
 export default Water;

@@ -1,0 +1,113 @@
+.energy-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .energy-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(70, 8, 33);
+    padding: 10px;
+    text-align: justify;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0.5, 0.8);
+    margin: 10px;
+  }
+  
+  .energy-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(45deg, rgb(179, 224, 171), rgb(62, 131, 93));
+  }
+  
+  .energy-item {
+    margin-bottom: 20px;
+  }
+  
+  .energyinputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 80px;
+  }
+  
+  .energyinputs > div {
+    width: 48%; /* Adjust as needed */
+  }
+  
+  
+  
+  
+  .calculate-button {
+    width: 30%;
+    padding: 15px;
+    margin: 20px auto;
+    border: none;
+    border-radius: 20px;
+    background-color: #6c380d;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    color: #fcf9f9ce;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .calculate-button:hover {
+    background-color: #814319;
+    transform: scale(1.1);
+  }
+  
+  .output-container {
+    margin-top: 40px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    background-color: #f9f9f9;
+    width: 800px;
+  }
+
+  
+  .output-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .output-text {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .high-consumption {
+    color: red;
+  }
+  
+  .low-consumption {
+    color: green;
+  }
+  
+  .output-subtitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .output-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .output-list-item {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
