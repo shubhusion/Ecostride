@@ -68,7 +68,7 @@ const Plastic = () => {
       <Company />
       <div className="plastic-container">
         <h2>Choose your plastic waste:</h2>
-        <div className="item-list">
+        <div className="product-container">
           {products.map((product, index) => (
             <div key={index} className="item" onClick={() => handleClick(product.name)}>
               <h3>{product.name}</h3>

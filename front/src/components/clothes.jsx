@@ -36,12 +36,37 @@ const Clothes = () => {
     } catch (error) {
       console.error('Error filtering products by category:', error);
     }
-};
-const addToCart = (product) => {
-  setCart([...cart, { ...product, quantity: 1 }]);
-};
+    };
+    const addToCart = (product) => {
+      setCart([...cart, { ...product, quantity: 1 }]);
+      const updatedProducts = products.map((p) => {
+        if (p.productId === product.productId) {
+          return { ...p, addedToCart: true };
+        }
+        return p;
+      });
+      setProducts(updatedProducts);
+    };
 
+    const incrementQuantity = (productId) => {
+      const updatedProducts = products.map((product) => {
+        if (product.productId === productId) {
+          return { ...product, quantity: product.quantity + 1 };
+        }
+        return product;
+      });
+      setProducts(updatedProducts);
+    };
 
+    const decrementQuantity = (productId) => {
+      const updatedProducts = products.map((product) => {
+        if (product.productId === productId && product.quantity > 1) {
+          return { ...product, quantity: product.quantity - 1 };
+        }
+        return product;
+      });
+      setProducts(updatedProducts);
+    };
   console.log("Rendering...");
   return (
     <>
@@ -54,7 +79,7 @@ const addToCart = (product) => {
             className={activeTab === 'All' ? 'active' : ''}
             onClick={() => fetchProducts()}
           >
-            All Clothes
+            All
           </button>
           <button
             className={activeTab === 'Men' ? 'active' : ''}
@@ -84,7 +109,7 @@ const addToCart = (product) => {
             className={activeTab === 'Aged' ? 'active' : ''}
             onClick={() => handleTabClick('Aged')}
           >
-            Aged Clothes
+            Old Age
           </button>
         </div>
         <div className="product-container">
@@ -95,7 +120,16 @@ const addToCart = (product) => {
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
                 <p>${product.price}</p>
-                <button onClick={() => addToCart(product)}>Add to Cart</button>
+                <div className="quantity-controls">
+                  <button className="quantity-btn" onClick={() => decrementQuantity(product.productId)}>-</button>
+                  <span className="quantity">{product.quantity}</span>
+                  <button className="quantity-btn" onClick={() => incrementQuantity(product.productId)}>+</button>
+                </div>
+                {product.addedToCart ? (
+                  <button className="add-to-cart added-to-cart">Item Added</button>
+                ) : (
+                  <button className="add-to-cart" onClick={() => addToCart(product)}>Add to Cart</button>
+                )}
               </div>
             </div>
           ))}

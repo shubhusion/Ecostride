@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './clothes.css';
+import './sustain.css';
 import Header from './header';
 import Footer from './footer';
 import Company from './company';
@@ -40,6 +40,13 @@ const Clothes = () => {
 
   const addToCart = (product) => {
     setCart([...cart, { ...product, quantity: 1 }]);
+    const updatedProducts = products.map((p) => {
+      if (p.productId === product.productId) {
+        return { ...p, addedToCart: true };
+      }
+      return p;
+    });
+    setProducts(updatedProducts);
   };
 
   console.log("Rendering...");
@@ -48,13 +55,13 @@ const Clothes = () => {
       <Header />
       <Addop />
       <Company />
-      <div className="clothes-container">
+      <div className="sustain-container">
         <div className="tab-container">
           <button
             className={activeTab === 'All' ? 'active' : ''}
             onClick={() => fetchProducts()}
           >
-            All Clothes
+            All
           </button>
           <button
             className={activeTab === 'Recycled Active Wear' ? 'active' : ''}
@@ -107,7 +114,11 @@ const Clothes = () => {
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
                 <p>${product.price}</p>
-                <button onClick={() => addToCart(product)}>Add to Cart</button>
+                {product.addedToCart ? (
+                  <button className="add-to-cart added-to-cart">Item Added</button>
+                ) : (
+                  <button className="add-to-cart" onClick={() => addToCart(product)}>Add to Cart</button>
+                )}
               </div>
             </div>
           ))}
