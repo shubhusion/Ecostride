@@ -1,101 +1,79 @@
 .login-container {
-    position: absolute;
-    top: 10%;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.5s ease;
-  }
-  
-  .login-active {
-    transform: translateX(0);
-  }
-  
-  .signup-active {
-    transform: translateX(-5%);
-  }
-  
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .login-toggle {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .toggle-button {
-    cursor: pointer;
-    padding: 10px 20px;
-    margin: 0 10px;
-    border: none;
-    background-color: transparent;
-    color: #333;
-    font-size: 16px;
-    outline: none;
-    transition: all 0.3s ease;
-  }
-  
-  .toggle-button:hover {
-    color: #666;
-  }
-  
-  .toggle-button.active {
-    color: #fff;
-    background-color: #333;
-  }
-  
-  .google-login-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    margin-bottom: 20px;
-    border: none;
-    background-color: #4285f4;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .google-login-button:hover {
-    background-color: #357ae8;
-  }
-  
-  .email-login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .email-login input {
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .email-login button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #4285f4;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .email-login button:hover {
-    background-color: #357ae8;
-  }
-  
+  max-width: 400px; /* Set maximum width for the login container */
+  margin: 0 auto; /* Center the login container horizontally */
+  padding: 20px;
+  background-image: linear-gradient(45deg, rgb(179, 224, 171), rgb(62, 131, 93));
+  border-radius: 10px;
+  min-height: 420px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.toggle-button {
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  background-color: transparent;
+  color: #333;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.toggle-button:hover {
+  color: #666;
+}
+
+.toggle-button.active {
+  color: #fff;
+  background-color: #333;
+}
+
+.email-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.email-login input {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.email-login button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #7d3528;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+  width: 160px;
+}
+
+.email-login button:hover {
+  background-color: #540909;
+  transform: scale(1.05);
+}
+
+.error {
+  color: red;
+  margin-top: 5px;
+  margin-bottom: 0;
+}

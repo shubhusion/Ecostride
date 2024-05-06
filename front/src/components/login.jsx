@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './login.css';
+import Header from './header';
+import Addop from './addop';
+import Company from './company';
+import Footer from './footer';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -114,6 +118,10 @@ const Login = () => {
   };
 
   return (
+    <>
+    <Header />
+    <Addop />
+    <Company />
     <div className={`login-container ${isLogin ? 'login-active' : 'signup-active'}`}>
       <div className="login-toggle">
         <button className={`toggle-button ${isLogin ? 'active' : ''}`} onClick={() => setIsLogin(true)}>Login</button>
@@ -151,6 +159,8 @@ const Login = () => {
         )}
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
