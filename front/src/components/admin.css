@@ -1,0 +1,76 @@
+/* admin.css */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.crud-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 800px;
+    width: 80%;
+    background-image: linear-gradient(45deg, rgb(179, 224, 171), rgb(62, 131, 93));
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+}
+
+.crud-column > * {
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="number"], select, button {
+    padding: 10px;
+    width: 60%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border-radius: 12px;
+    border: 1px solid #cfe89e;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
+    transition: box-shadow 0.3s ease; 
+}
+
+button {
+    width: 30%; /* Adjust width */
+    padding: 15px; /* Increase padding */
+    margin: 20px auto; /* Center the button */
+    border: none;
+    border-radius: 20px;
+    background-color: #6c380d;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    color: #fcf9f9ce;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+    background-color: #814319;
+    transform: scale(1.1);
+}
+
+.get-products-categorywise {
+    align-self: flex-start;
+}
+
+.category-products-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.category-products-list > div {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.category-products-list > div:nth-child(even) {
+    background-color: #f9f9f9;
+}

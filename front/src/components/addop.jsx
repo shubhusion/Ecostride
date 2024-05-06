@@ -7,7 +7,7 @@ const Addop = () => {
     { name: 'Home', path: '/' },
     { name: 'Shopping Products', path: '/category/Sustainable Products' },
     { name: 'Carbon Footprint Calculator', path: '/carbon-footprint' },
-    { name: 'Waste Disposal', path: '/waste-disposal' },
+    { name: 'Waste Disposal', path: '/market' },
     { name: 'Energy Calculator', path: '/energy-saved' },
     { name: 'Sale', path: '/market' },
     { name: 'Contact', path: '/contact' }

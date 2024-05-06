@@ -22,6 +22,7 @@ import Biod from './components/biod';
 import CartBuy from './components/cartBuy';
 import CartSell from './components/cartSell';
 import Market from './components/market';
+import Admin from './components/admin';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/cart" element={<CartBuy />} />
         <Route path="/sell" element={<CartSell />} />
         <Route path="/market" element={<Market />} />
+        <Route path="/profile" element={<Admin />} />
       </Routes>
     </Router>
   );
