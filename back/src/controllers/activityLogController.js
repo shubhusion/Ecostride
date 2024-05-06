@@ -5,8 +5,7 @@ exports.createActivityLog = async (req, res) => {
   try {
     const { activityType, activityDate, description } = req.body;
     const activityLog = await ActivityLog.create({
-      userId: req.user._id,
-      activityType,
+      category: activityType,
       activityDate,
       description,
     });
@@ -19,7 +18,41 @@ exports.createActivityLog = async (req, res) => {
 // Get user's activity logs
 exports.getUserActivityLogs = async (req, res) => {
   try {
-    const activityLogs = await ActivityLog.find({ userId: req.user._id });
+    const activityLogs = await ActivityLog.find({});
+    res.json(activityLogs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getActivityLogsByDate = async (req, res) => {
+  try {
+    const { date } = req.body; // Assuming date is passed as a body parameter
+    
+    // If date is provided, create a date range for the entire day
+    let startOfDay, endOfDay;
+    if (date) {
+      startOfDay = new Date(date);
+      startOfDay.setHours(0, 0, 0, 0); // Set to beginning of the day
+      endOfDay = new Date(date);
+      endOfDay.setHours(23, 59, 59, 999); // Set to end of the day
+    }
+
+    let activityLogs;
+
+    if (date) {
+      // If date is provided, filter activity logs by that date range
+      activityLogs = await ActivityLog.find({
+        activityDate: {
+          $gte: startOfDay,
+          $lt: endOfDay
+        }
+      });
+    } else {
+      // If no date provided, retrieve all activity logs
+      activityLogs = await ActivityLog.find({});
+    }
+
     res.json(activityLogs);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -30,35 +63,42 @@ exports.getUserActivityLogs = async (req, res) => {
 // Calculate carbon footprint
 exports.calculatecarbonFootprint = async (req, res) => {
   try {
-    const data = req.body;
-    const totalFootprint = calculateTotalFootprint(data);
+    const {
+      electricityBill,
+      gasBill,
+      oilBill,
+      carMileage,
+      shortFlights,
+      longFlights,
+      recycleNewspaper,
+      recycleAluminum,
+    } = req.body;
+
+    const totalFootprint = calculateTotalFootprint(req.body);
     const category = determineCategory(totalFootprint);
-    
-    // Fetch user from request or database
-    const user = await User.findById(req.user._id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
 
-    // Update user data
-    user.electricityBill = req.body.electricBill;
-    user.gasBill = req.body.gasBill;
-    user.oilBill = req.body.oilBill;
-    user.carMileage = req.body.carMileage;
-    user.shortFlights = req.body.shortFlights;
-    user.longFlights = req.body.longFlights;
-    user.recycleNewspaper = req.body.recycleNewspaper;
-    user.recycleAluminum = req.body.recycleAluminum;
-    user.totalFootprint = totalFootprint;
-    user.category = category;
+    const activityLog = new ActivityLog({
+      electricityBill,
+      gasBill,
+      oilBill,
+      carMileage,
+      shortFlights,
+      longFlights,
+      recycleNewspaper,
+      recycleAluminum,
+      totalFootprint,
+      category,
+      activityDate: new Date(),
+    });
 
-    // Save user data
-    const updatedUser = await user.save();
-    res.json({ totalFootprint, category, user: updatedUser });
+    await activityLog.save();
+
+    res.json({ totalFootprint, category });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 // Get carbon footprint of all users
 exports.getCarbonFootprints = async (req, res) => {

@@ -5,6 +5,7 @@ import Header from './header';
 import Addop from './addop';
 import Company from './company';
 import Footer from './footer';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ const Login = () => {
   const [name, setName] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     // Basic email validation regex
@@ -70,10 +72,16 @@ const Login = () => {
     setIsLogin(!isLogin);
   };
 
-  const handleLoginSuccess = (email) => {
+  const handleLoginSuccess = (email, role) => {
     console.log('Logged in successfully as', email);
     // You can add more logic here, such as redirecting to another page
+    if (role === 'User') {
+      navigate('/'); // Replace '/user-dashboard' with the appropriate route for the user dashboard
+    } else {
+      navigate('/admin'); // Replace '/admin-dashboard' with the appropriate route for the admin dashboard
+    }
   };
+  
 
   const handleLogin = async () => {
     if (!validateForm()) {
@@ -82,10 +90,11 @@ const Login = () => {
     try {
       console.log('Logging in...');
       const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
-      const { token } = response.data;
+      const { token , role } = response.data;
       console.log(token);
+      console.log(role)
       localStorage.setItem('token', token);
-      onLogin(email);
+      handleLoginSuccess(email, role); // Pass the role to handleLoginSuccess
     } catch (error) {
       setErrors({ login: error.response?.data?.message || 'An unknown error occurred' });
       console.error('Login Error:', error);
@@ -94,7 +103,7 @@ const Login = () => {
       }, 5000); // Error disappears after 5 seconds
     }
   };
-
+  
   const handleSignup = async () => {
     if (!validateForm()) {
       return;

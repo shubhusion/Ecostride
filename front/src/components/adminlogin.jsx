@@ -5,6 +5,7 @@ import Header from './header';
 import Addop from './addop';
 import Company from './company';
 import Footer from './footer';
+import { useNavigate } from 'react-router-dom';
 
 const ALogin = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ const ALogin = () => {
   const [name, setName] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     // Basic email validation regex
@@ -115,6 +117,7 @@ const ALogin = () => {
   const onLogin = (email) => {
     handleLoginSuccess(email);
     // Add any additional logic you want to execute on login here
+    navigate('/admin');
   };
 
   return (
