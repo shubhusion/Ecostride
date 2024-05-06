@@ -27,7 +27,7 @@
 
 input[type="text"], input[type="number"], select, button {
     padding: 10px;
-    width: 60%;
+    width: 100%;
     padding: 10px;
     margin: 5px 0 15px;
     border-radius: 12px;
@@ -37,7 +37,7 @@ input[type="text"], input[type="number"], select, button {
 }
 
 button {
-    width: 30%; /* Adjust width */
+    width: 22%; /* Adjust width */
     padding: 15px; /* Increase padding */
     margin: 20px auto; /* Center the button */
     border: none;

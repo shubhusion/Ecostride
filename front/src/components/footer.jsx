@@ -24,8 +24,8 @@ const Footer = () => {
             <h4>EcoStride : Sustainability Living Tracker</h4>
             <p>
               Jaypee Institute Of Information Technology, Noida, India<br />
-              <strong>Phone :</strong> +91 86904 09766<br />
-              <strong>Email :</strong> adityaryk123@gmail.com
+              <strong>Phone :</strong> +91 91490 03706<br />
+              <strong>Email :</strong> guptastuti1920@gmail.com
             </p>
             <div className="footer-message-input">
               <input type="text" placeholder="Send us a message" value={message} onChange={handleMessageChange} />
@@ -53,7 +53,7 @@ const Footer = () => {
               </i> 2023 Copyright <strong><span>EcoStride</span></strong>. All Rights Reserved.
             </div>
             <div className='design'>
-              Designed by &nbsp; <a href="https://www.linkedin.com/in/aditya-shrivastava-14b6a6222/" className="text-purple-500"> Aditya Kumar</a>
+              Designed by &nbsp; <a href="https://www.linkedin.com/in/aditya-shrivastava-14b6a6222/" className="text-purple-500"> Team EcoStride</a>
             </div>
           </div>
           <div className="footer-bottom-logo">

@@ -2,6 +2,10 @@
 import React, { useState } from 'react';
 import './admin.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import Header from './header.jsx';
+import Footer from './footer';
+import Addop from './addop';
+import Company from './company';
 
 const Admin = () => {
     const [productName, setProductName] = useState('');
@@ -47,6 +51,10 @@ const Admin = () => {
     };
 
     return (
+        <>
+        <Header />
+        <Addop />
+        <Company />
         <div className="admin-container">
             <div className="crud-column">
                 <input type="text" placeholder="Product Name" value={productName} onChange={(e) => setProductName(e.target.value)} />
@@ -83,6 +91,8 @@ const Admin = () => {
                 <button onClick={handleGetProductsByCategory}><i className="fas fa-plus"></i> Get Products</button>
             </div>
         </div>
+        <Footer />
+        </>
     );
 };
 

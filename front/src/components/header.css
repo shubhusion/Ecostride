@@ -82,3 +82,34 @@
 .header-icon {
   cursor: pointer;
 }
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(24, 115, 24); /* Green background color */
+  color: white; /* White text color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow */
+  border-radius: 20px; /* Rounded corners */
+  position: absolute;
+  top: 11%;
+  padding: 4px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.dropdown-content.show {
+  display: block; 
+}
+
+.dropdown-content a {
+  padding: 6px 4px;
+  display: block;
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(236, 142, 142, 0.1);
+}

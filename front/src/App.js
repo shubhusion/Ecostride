@@ -36,7 +36,7 @@ function App() {
         <Route path="/carbon-footprint" element={<Carb />}/>
         <Route path="/energy-saved" element={<Energy />} />
         <Route path="/waste-reduction-progress" element={<Waste />} />
-        <Route path="/sustainable-shopping" element={<Login />} />
+        <Route path="/sustainable-shopping" element={<Sustain />} />
         <Route path="/water-conservation" element={<Water />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/category/Sustainable Products" element={<Sustain />} />
@@ -51,7 +51,8 @@ function App() {
         <Route path="/cart" element={<CartBuy />} />
         <Route path="/sell" element={<CartSell />} />
         <Route path="/market" element={<Market />} />
-        <Route path="/profile" element={<Admin />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
