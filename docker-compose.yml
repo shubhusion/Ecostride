@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    image: backend2
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/
+
+  frontend:
+    image: frontend
+    ports:
+      - "3000:3000"
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

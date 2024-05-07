@@ -1,0 +1,7 @@
+FROM node:alpine
+WORKDIR /app/back
+COPY . .
+RUN cd src
+RUN npm install
+EXPOSE 5000:5000
+CMD ["node","app.js"]
