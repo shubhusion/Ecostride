@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './cartSell.css';
 import Header from './header';
 import Footer from './footer';
@@ -6,12 +6,45 @@ import Company from './company';
 import Addop from './addop';
 
 const CartSell = () => {
-  const [cart, setCart] = useState([
-    { id: 1, name: 'Glass Bottle', price: 5, quantity: 3, image: 'glass-bottle.jpg' },
-    { id: 2, name: 'Lead Pipe', price: 8, quantity: 2, image: 'lead-pipe.jpg' },
-    // Add more products with their details including images
-  ]);
+  const [cart, setCart] = useState([]);
   const [pickupMessage, setPickupMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCartDetails = async () => {
+      try {
+        const cartResponse = await fetch('http://localhost:5000/api/cart/');
+        const cartData = await cartResponse.json();
+
+        // Extract the items array from the response
+        const cartItems = cartData.items;
+
+        // For each item in the cart, fetch additional product details
+        const updatedCart = await Promise.all(
+          cartItems.map(async (cartItem) => {
+            const productResponse = await fetch(`http://localhost:5000/api/product/${cartItem.productId}`);
+            const productData = await productResponse.json();
+
+            return {
+              id: cartItem.productId,
+              name: productData.name,
+              price: cartItem.price, // Use the price from the cart item
+              quantity: cartItem.quantity,
+              image: productData.imageUrl,
+            };
+          })
+        );
+
+        setCart(updatedCart);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching cart details:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchCartDetails();
+  }, []);
 
   // Function to calculate total price for selling products
   const calculateTotalPrice = () => {
@@ -42,6 +75,10 @@ const CartSell = () => {
     setPickupMessage('Rider called for pickup !!');
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Header />
@@ -69,7 +106,7 @@ const CartSell = () => {
         </div>
         <div className="total-price">
           <p>Total Price: ${calculateTotalPrice()}</p>
-          <button onClick={callRider}>Call Rider Now</button>
+          <button onClick={callRider}>Submit Order Now</button>
           {pickupMessage && <p>{pickupMessage}</p>}
         </div>
       </div>
