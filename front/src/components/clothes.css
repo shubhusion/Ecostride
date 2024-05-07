@@ -71,6 +71,7 @@ button:hover {
   font-size: 16px;
   margin-top: 10px;
   cursor: pointer;
+  width: 100%;
 }
 
 .product-info button.add-to-cart:hover {
