@@ -1,101 +1,118 @@
-import React from 'react';
-import './cartBuy.css';
+import React, { useState, useEffect } from 'react';
+import './cartSell.css';
 import Header from './header';
 import Footer from './footer';
-import { useState } from 'react';
-import Addop from './addop';
 import Company from './company';
-import {loadStripe} from '@stripe/stripe-js';
-import { useNavigate } from "react-router-dom";
-import { faCartPlus, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import Addop from './addop';
 
+const CartSell = () => {
+  const [cart, setCart] = useState([]);
+  const [pickupMessage, setPickupMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
-const CartBuy = () => {
-    const [cart, setCart] = useState([
-        { id: 1, name: 'T-Shirt', price: 20, quantity: 2, image: 'tshirt.jpg' },
-        { id: 2, name: 'Jeans', price: 30, quantity: 1, image: 'jeans.jpg' },
-        { id: 3, name: 'Sneakers', price: 50, quantity: 1, image: 'sneakers.jpg' },
-        // Add more products with their details including images
-    ]);
-    console.log("Hello")
-    console.log(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
+  useEffect(() => {
+    const fetchCartDetails = async () => {
+      try {
+        const cartResponse = await fetch('http://localhost:5000/api/buycart/');
+        const cartData = await cartResponse.json();
 
-    // Function to calculate total price for buying products
-    const calculateTotalPrice = () => {
-        return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-    };
+        // Extract the items array from the response
+        const cartItems = cartData.items;
 
-    // Function to handle increasing quantity
-    const handleIncreaseQuantity = (index) => {
-        const updatedCart = [...cart];
-        updatedCart[index].quantity++;
+        // For each item in the cart, fetch additional product details
+        const updatedCart = await Promise.all(
+          cartItems.map(async (cartItem) => {
+            const productResponse = await fetch(`http://localhost:5000/api/product/${cartItem.productId}`);
+            const productData = await productResponse.json();
+
+            return {
+              id: cartItem.productId,
+              name: productData.name,
+              price: cartItem.price, // Use the price from the cart item
+              quantity: cartItem.quantity,
+              image: productData.imageUrl,
+            };
+          })
+        );
+
         setCart(updatedCart);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching cart details:', error);
+        setLoading(false);
+      }
     };
 
-    // Function to handle decreasing quantity
-    const handleDecreaseQuantity = (index) => {
-        const updatedCart = [...cart];
-        if (updatedCart[index].quantity > 1) {
-            updatedCart[index].quantity--;
-        }if (updatedCart[index].quantity <= 0) {
-            updatedCart.splice(index, 1); // Remove the product from the cart array
-        }
-        setCart(updatedCart);
-    };
+    fetchCartDetails();
+  }, []);
 
+  // Function to calculate total price for selling products
+  const calculateTotalPrice = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
 
-    const handlePayment = async () => {
-        const stripePromise = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-    
-        const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/create-checkout-session`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(cart)
-        });
+  // Function to handle increasing quantity
+  const handleIncreaseQuantity = (index) => {
+    const updatedCart = [...cart];
+    updatedCart[index].quantity++;
+    setCart(updatedCart);
+  };
 
-        //if (res.status === 500) return;
+  // Function to handle decreasing quantity or remove product from cart if quantity is 0
+  const handleDecreaseQuantity = (index) => {
+    const updatedCart = [...cart];
+    if (updatedCart[index].quantity > 1) {
+      updatedCart[index].quantity--;
+    } else if (updatedCart[index].quantity === 1) {
+      updatedCart.splice(index, 1); // Remove the product from the cart array
+    }
+    setCart(updatedCart);
+  };
 
-        const data = await res.json();
-        console.log(data);
+  // Function to call rider for pickup
+  const callRider = () => {
+    // Placeholder logic for calling rider
+    setPickupMessage('Rider called for pickup !!');
+  };
 
-        stripePromise.redirectToCheckout({ sessionId: data.id });
-    };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    return (
-        <>
-            <Header />
-            <Addop />
-            <Company/>
-            <div className="cart-container">
-                <h2>Your Buy Cart</h2>
-                <div className="product-list">
-                    {cart.map((product, index) => (
-                        <div key={index} className="product-item">
-                            <div className="product-image">
-                                <img src={product.image} alt={product.name} />
-                            </div>
-                            <div className="product-info">
-                                <p>{product.name}</p>
-                                <p>Price: ${product.price}</p>
-                                <div className="quantity-controls">
-                                    <button onClick={() => handleDecreaseQuantity(index)}>-</button>
-                                    <span>{product.quantity}</span>
-                                    <button onClick={() => handleIncreaseQuantity(index)}>+</button>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+  return (
+    <>
+      <Header />
+      <Addop />
+      <Company/>
+      <div className="cart-container">
+        <h2>Your Selling Cart</h2>
+        <div className="product-list">
+          {cart.map((product, index) => (
+            <div key={index} className="product-item">
+              <div className="product-image">
+                <img src={product.image} alt={product.name} />
+              </div>
+              <div className="product-info">
+                <p>{product.name}</p>
+                <p>Price: ${product.price}</p>
+                <div className="quantity-controls">
+                  <button onClick={() => handleDecreaseQuantity(index)}>-</button>
+                  <span>{product.quantity}</span>
+                  <button onClick={() => handleIncreaseQuantity(index)}>+</button>
                 </div>
-                <div className="total-price">
-                    <p>Total Price: ${calculateTotalPrice()}</p>
-                    <button onClick={handlePayment}>Pay Now</button>
-                </div>
+              </div>
             </div>
-            <Footer />
-        </>
-    );
+          ))}
+        </div>
+        <div className="total-price">
+          <p>Total Price: ${calculateTotalPrice()}</p>
+          <button onClick={callRider}>Submit Order Now</button>
+          {pickupMessage && <p>{pickupMessage}</p>}
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
 };
 
-export default CartBuy;
+export default CartSell;

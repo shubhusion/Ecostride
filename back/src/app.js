@@ -10,6 +10,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const buycartRoutes = require('./routes/buycartRoutes');
 // const authRoutes = require('./routes/auth');
 // Load environment variables from .env file
 dotenv.config({ path: path.join(__dirname, '.env') });
@@ -29,6 +30,7 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/buycart', buycartRoutes);
 // Other server configuration and routes...
 
 // app.use('/auth', authRoutes);

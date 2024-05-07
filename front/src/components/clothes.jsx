@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './clothes.css';
+import './clothes.css'; // Importing CSS as before
 import Header from './header';
 import Footer from './footer';
 import Company from './company';
@@ -36,37 +36,49 @@ const Clothes = () => {
     } catch (error) {
       console.error('Error filtering products by category:', error);
     }
-    };
-    const addToCart = (product) => {
+  };
+
+  const addToCart = async (product) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/buycart/', {
+        productId: product.productId,
+        quantity: 1  // Set quantity to 1 when adding to cart
+      });
+      console.log("Product added to cart:", response.data);
       setCart([...cart, { ...product, quantity: 1 }]);
       const updatedProducts = products.map((p) => {
         if (p.productId === product.productId) {
-          return { ...p, addedToCart: true };
+          return { ...p, addedToCart: true, quantity: 1 }; // Ensure quantity is set
         }
         return p;
       });
       setProducts(updatedProducts);
-    };
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
+  };
+  
+  const incrementQuantity = (productId) => {
+    const updatedProducts = products.map((product) => {
+      if (product.productId === productId) {
+        return { ...product, quantity: (product.quantity || 0) + 1 }; // Ensure quantity is valid
+      }
+      return product;
+    });
+    setProducts(updatedProducts);
+  };
+  
+  const decrementQuantity = (productId) => {
+    const updatedProducts = products.map((product) => {
+      if (product.productId === productId && product.quantity > 1) {
+        return { ...product, quantity: (product.quantity || 0) - 1 }; // Ensure quantity is valid
+      }
+      return product;
+    });
+    setProducts(updatedProducts);
+  };
+  
 
-    const incrementQuantity = (productId) => {
-      const updatedProducts = products.map((product) => {
-        if (product.productId === productId) {
-          return { ...product, quantity: product.quantity + 1 };
-        }
-        return product;
-      });
-      setProducts(updatedProducts);
-    };
-
-    const decrementQuantity = (productId) => {
-      const updatedProducts = products.map((product) => {
-        if (product.productId === productId && product.quantity > 1) {
-          return { ...product, quantity: product.quantity - 1 };
-        }
-        return product;
-      });
-      setProducts(updatedProducts);
-    };
   console.log("Rendering...");
   return (
     <>
