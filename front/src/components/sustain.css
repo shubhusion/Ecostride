@@ -11,20 +11,22 @@
   }
   
   .tab-container button {
-    padding: 10px 20px;
+    padding: 10px 15px;
     margin: 0 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 35px;
     cursor: pointer;
     transition: background-color 0.3s;
   }
   
   .tab-container button:hover {
     background-color: lightgray;
+    color: black;
   }
   
   .tab-container button.active {
     background-color: lightblue;
+    color: black;
   }
   
   .product-container {
@@ -34,7 +36,7 @@
   }
   
   .product-item {
-    margin: 10px;
+    margin: 12px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -44,10 +46,11 @@
   
   .product-item img {
     width: 100%;
-    height: auto;
+    height: 80%; /* Fill the entire container */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
     border-radius: 5px;
   }
-  
+
   .product-info h3 {
     margin-top: 10px;
     font-size: 16px;
@@ -71,6 +74,7 @@
     font-size: 16px;
     margin-top: 10px;
     cursor: pointer;
+    width:100%;
   }
   
   .product-info button:hover {
